@@ -1,10 +1,7 @@
 package com.joonhee.moneygate.chart.port.out;
 
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-
 import java.util.Date;
 
-@JsonNaming
 public class Attr {
     public Date timestamp;
     public String actualState;
