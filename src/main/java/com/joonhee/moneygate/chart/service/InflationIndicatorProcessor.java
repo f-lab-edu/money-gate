@@ -15,26 +15,26 @@ public class InflationIndicatorProcessor implements InflationIndicator {
 
     @Override
     public Chart getCoreCpi() {
-        return Chart.from(inflationIndicatorInvestingComPort.getCoreCpi());
+        return new Chart(inflationIndicatorInvestingComPort.getCoreCpi());
     }
 
     @Override
     public Chart getCpi() {
-        return Chart.from(inflationIndicatorInvestingComPort.getCpi());
+        return new Chart(inflationIndicatorInvestingComPort.getCpi());
     }
 
     @Override
     public Chart getCorePpi() {
-        return Chart.from(inflationIndicatorInvestingComPort.getCorePpi());
+        return new Chart(inflationIndicatorInvestingComPort.getCorePpi());
     }
 
     @Override
     public Chart getEmploymentCostIndex() {
-        return Chart.from(inflationIndicatorInvestingComPort.getEmploymentCostIndex());
+        return new Chart(inflationIndicatorInvestingComPort.getEmploymentCostIndex());
     }
 
     @Override
     public Chart getAverageHourlyEarnings() {
-        return Chart.from(inflationIndicatorInvestingComPort.getAverageHourlyEarnings());
+        return new Chart(inflationIndicatorInvestingComPort.getAverageHourlyEarnings());
     }
 }

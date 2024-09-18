@@ -28,7 +28,7 @@ public class Chart {
         return List.copyOf(attr);
     }
 
-    static public class Data {
+    public class Data {
         private Long value;
         private Double percent;
 
@@ -46,23 +46,15 @@ public class Chart {
         }
     }
 
-    public static Chart from(ChartResponse chartResponse) {
-        try {
-
-            return new Chart(
-                    chartResponse.data.stream()
-                            .map(data ->
-                                    new Data(
-                                            Optional.ofNullable(data.get(0)).map(o -> (Long) o).orElseThrow(null),
-                                            Optional.ofNullable(data.get(1)).map(o -> Double.valueOf(o.toString())).orElseThrow()
-                                    ))
-                            .collect(Collectors.toList()
-                            ),
-                    chartResponse.attr
-            );
-        } catch (Exception e) {
-            return null;
-        }
-
+    public Chart(ChartResponse chartResponse) {
+        this.data = chartResponse.data.stream()
+                .map(data ->
+                        new Data(
+                                Optional.ofNullable(data.get(0)).map(o -> (Long) o).orElseThrow(null),
+                                Optional.ofNullable(data.get(1)).map(o -> Double.valueOf(o.toString())).orElseThrow()
+                        ))
+                .collect(Collectors.toList()
+                );
+        this.attr = chartResponse.attr;
     }
 }

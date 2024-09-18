@@ -15,46 +15,46 @@ public class LeadingIndicatorProcessor implements LeadingIndicator {
 
     @Override
     public Chart getCbConsumer() {
-        return Chart.from(leadingIndicatorInvestingComPort.getCbConsumer());
+        return new Chart(leadingIndicatorInvestingComPort.getCbConsumer());
     }
 
     @Override
     public Chart getPcePriceIndex() {
-        return Chart.from(leadingIndicatorInvestingComPort.getPce());
+        return new Chart(leadingIndicatorInvestingComPort.getPce());
     }
 
     @Override
     public Chart getPersonalIncome() {
-        return Chart.from(leadingIndicatorInvestingComPort.getPersonalIncome());
+        return new Chart(leadingIndicatorInvestingComPort.getPersonalIncome());
     }
 
     @Override
     public Chart getRetailSales() {
-        return Chart.from(leadingIndicatorInvestingComPort.getRetailSales());
+        return new Chart(leadingIndicatorInvestingComPort.getRetailSales());
     }
 
     @Override
     public Chart getNewHomeSales() {
-        return Chart.from(leadingIndicatorInvestingComPort.getNewHomeSales());
+        return new Chart(leadingIndicatorInvestingComPort.getNewHomeSales());
     }
 
     @Override
     public Chart getExistingHomeSales() {
-        return Chart.from(leadingIndicatorInvestingComPort.getExistingHomeSales());
+        return new Chart(leadingIndicatorInvestingComPort.getExistingHomeSales());
     }
 
     @Override
     public Chart getAllCarSales() {
-        return Chart.from(leadingIndicatorInvestingComPort.getAllCarSales());
+        return new Chart(leadingIndicatorInvestingComPort.getAllCarSales());
     }
 
     @Override
     public Chart getIsmManufacturingPMI() {
-        return Chart.from(leadingIndicatorInvestingComPort.getIsmManufacturingPMI());
+        return new Chart(leadingIndicatorInvestingComPort.getIsmManufacturingPMI());
     }
 
     @Override
     public Chart getManufacturingPMI() {
-        return Chart.from(leadingIndicatorInvestingComPort.getManufacturingPMI());
+        return new Chart(leadingIndicatorInvestingComPort.getManufacturingPMI());
     }
 }
