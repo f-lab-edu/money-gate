@@ -1,0 +1,7 @@
+investing:
+  com:
+    src: "https://sbcharts.investing.com/events_charts/us"
+
+springdoc:
+  swagger-ui:
+    path:"/swagger"
