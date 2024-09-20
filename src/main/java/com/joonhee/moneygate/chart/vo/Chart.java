@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 
@@ -43,6 +44,7 @@ public class Chart {
             this.forecast = forecast;
             this.forecastFormatted = forecastFormatted;
             this.previous = previous;
+            this.previousFormatted = previousFormatted;
             this.announcedAt = announcedAt;
         }
 
@@ -80,6 +82,8 @@ public class Chart {
     }
 
     public Chart(ChartResponse chartResponse) {
+        AtomicReference<Optional<Data>> previousData = new AtomicReference<>(null);
+
         this.content = chartResponse.getAttr().stream().map(attr -> {
             Data data = new Data(
                     Optional.ofNullable(attr.getActualState()).orElse(null),
@@ -87,10 +91,11 @@ public class Chart {
                     Optional.ofNullable(attr.getActualFormatted()).orElse(null),
                     Optional.ofNullable(attr.getForecast()).orElse(null),
                     Optional.ofNullable(attr.getForecastFormatted()).orElse(null),
-                    Optional.ofNullable(attr.getRevised()).orElse(null),
-                    Optional.ofNullable(attr.getRevisedFormatted()).orElse(null),
+                    previousData.get() != null ? previousData.get().orElseThrow().actual : null,
+                    previousData.get() != null ? previousData.get().orElseThrow().actualFormatted : null,
                     Optional.ofNullable(attr.getTimestamp().toInstant().atZone(ZoneId.of("Asia/Seoul"))).orElse(null)
             );
+            previousData.set(Optional.of(data));
             return data;
         }).collect(Collectors.toList());
     }
