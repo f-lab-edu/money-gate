@@ -82,14 +82,14 @@ public class Chart {
     public Chart(ChartResponse chartResponse) {
         this.content = chartResponse.attr.stream().map(attr -> {
             Data data = new Data(
-                    Optional.ofNullable(attr.actualState).orElse(null),
-                    Optional.ofNullable(attr.actual).orElse(null),
-                    Optional.ofNullable(attr.actualFormatted).orElse(null),
-                    Optional.ofNullable(attr.forecast).orElse(null),
-                    Optional.ofNullable(attr.forecastFormatted).orElse(null),
-                    Optional.ofNullable(attr.revised).orElse(null),
-                    Optional.ofNullable(attr.revisedFormatted).orElse(null),
-                    Optional.ofNullable(attr.timestamp.toInstant().atZone(ZoneId.of("Asia/Seoul"))).orElse(null)
+                    Optional.ofNullable(attr.getActualState()).orElse(null),
+                    Optional.ofNullable(attr.getActual()).orElse(null),
+                    Optional.ofNullable(attr.getActualFormatted()).orElse(null),
+                    Optional.ofNullable(attr.getForecast()).orElse(null),
+                    Optional.ofNullable(attr.getForecastFormatted()).orElse(null),
+                    Optional.ofNullable(attr.getRevised()).orElse(null),
+                    Optional.ofNullable(attr.getRevisedFormatted()).orElse(null),
+                    Optional.ofNullable(attr.getTimestamp().toInstant().atZone(ZoneId.of("Asia/Seoul"))).orElse(null)
             );
             return data;
         }).collect(Collectors.toList());
