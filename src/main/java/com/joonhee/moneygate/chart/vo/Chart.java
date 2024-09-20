@@ -80,7 +80,7 @@ public class Chart {
     }
 
     public Chart(ChartResponse chartResponse) {
-        this.content = chartResponse.attr.stream().map(attr -> {
+        this.content = chartResponse.getAttr().stream().map(attr -> {
             Data data = new Data(
                     Optional.ofNullable(attr.getActualState()).orElse(null),
                     Optional.ofNullable(attr.getActual()).orElse(null),
