@@ -95,8 +95,3 @@ public class Chart {
         }).collect(Collectors.toList());
     }
 }
-
-enum ChartType {
-    LEADING_INDICATOR,
-    INFLATION_INDICATOR
-}
