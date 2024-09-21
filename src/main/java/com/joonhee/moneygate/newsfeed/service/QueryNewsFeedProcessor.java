@@ -7,6 +7,9 @@ import com.joonhee.moneygate.newsfeed.usecase.QueryNewsFeedUseCase;
 
 import java.util.List;
 
+/**
+ * TODO:뉴스피드 조회하는 비지니스 로직으로 페이지네이션이 추가 돼야합니다. Command 코드 리뷰를 받은 후 추가 작업예정입니다.
+ */
 public class QueryNewsFeedProcessor implements QueryNewsFeedUseCase {
     private final NewsFeedRepository newsFeedRepository;
     public QueryNewsFeedProcessor(NewsFeedRepository newsFeedRepository) {
