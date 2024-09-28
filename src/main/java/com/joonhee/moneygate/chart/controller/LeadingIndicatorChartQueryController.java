@@ -1,7 +1,7 @@
 package com.joonhee.moneygate.chart.controller;
 
 
-import com.joonhee.moneygate.chart.usecase.InflationIndicator;
+import com.joonhee.moneygate.chart.service.InflationIndicatorService;
 import com.joonhee.moneygate.chart.vo.EconomyChart;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chart")
 public class LeadingIndicatorChartQueryController {
-    private final InflationIndicator inflationIndicator;
+    private final InflationIndicatorService inflationIndicator;
 
-    public LeadingIndicatorChartQueryController(InflationIndicator inflationIndicator) {
+    public LeadingIndicatorChartQueryController(InflationIndicatorService inflationIndicator) {
         this.inflationIndicator = inflationIndicator;
     }
 
