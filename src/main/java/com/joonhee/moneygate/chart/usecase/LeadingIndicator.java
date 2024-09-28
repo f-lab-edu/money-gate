@@ -1,15 +1,15 @@
 package com.joonhee.moneygate.chart.usecase;
 
-import com.joonhee.moneygate.chart.vo.Chart;
+import com.joonhee.moneygate.chart.vo.EconomyChart;
 
 public interface LeadingIndicator {
-    Chart getCbConsumer();
-    Chart getPcePriceIndex();
-    Chart getPersonalIncome();
-    Chart getRetailSales();
-    Chart getNewHomeSales();
-    Chart getExistingHomeSales();
-    Chart getAllCarSales();
-    Chart getIsmManufacturingPMI();
-    Chart getManufacturingPMI();
+    EconomyChart getCbConsumer();
+    EconomyChart getPcePriceIndex();
+    EconomyChart getPersonalIncome();
+    EconomyChart getRetailSales();
+    EconomyChart getNewHomeSales();
+    EconomyChart getExistingHomeSales();
+    EconomyChart getAllCarSales();
+    EconomyChart getIsmManufacturingPMI();
+    EconomyChart getManufacturingPMI();
 }

@@ -2,7 +2,7 @@ package com.joonhee.moneygate.chart.controller;
 
 
 import com.joonhee.moneygate.chart.usecase.InflationIndicator;
-import com.joonhee.moneygate.chart.vo.Chart;
+import com.joonhee.moneygate.chart.vo.EconomyChart;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,31 +18,31 @@ public class LeadingIndicatorChartQueryController {
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/core-cpi")
-    Chart getCoreCpi() {
+    EconomyChart getCoreCpi() {
         return inflationIndicator.getCoreCpi();
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/cpi")
-    Chart getCpi() {
+    EconomyChart getCpi() {
         return inflationIndicator.getCpi();
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/core-ppi")
-    Chart getCorePpi() {
+    EconomyChart getCorePpi() {
         return inflationIndicator.getCorePpi();
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/employment-cost-index")
-    Chart getEmploymentCostIndex() {
+    EconomyChart getEmploymentCostIndex() {
         return inflationIndicator.getEmploymentCostIndex();
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/average-hourly-earnings")
-    Chart getAverageHourlyEarnings() {
+    EconomyChart getAverageHourlyEarnings() {
         return inflationIndicator.getAverageHourlyEarnings();
     }
 }

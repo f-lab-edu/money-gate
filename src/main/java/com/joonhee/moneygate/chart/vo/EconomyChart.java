@@ -11,14 +11,19 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 
-public class Chart {
-    private List<Data> content;
+public class EconomyChart {
+    private final EconomyChartType type;
+    private List<IndicatorData> content;
 
-    public List<Data> getContent() {
+    public EconomyChartType getType() {
+        return type;
+    }
+
+    public List<IndicatorData> getContent() {
         return List.copyOf(content);
     }
 
-    public class Data {
+    public class IndicatorData {
         private ActualState actualState;
         private Double actual;
         private String actualFormatted;
@@ -28,15 +33,15 @@ public class Chart {
         private String previousFormatted;
         private ZonedDateTime announcedAt;
 
-        public Data(
-                ActualState actualState,
-                Double actual,
-                String actualFormatted,
-                Double forecast,
-                String forecastFormatted,
-                Double previous,
-                String previousFormatted,
-                ZonedDateTime announcedAt
+        public IndicatorData(
+            ActualState actualState,
+            Double actual,
+            String actualFormatted,
+            Double forecast,
+            String forecastFormatted,
+            Double previous,
+            String previousFormatted,
+            ZonedDateTime announcedAt
         ) {
             this.actualState = actualState;
             this.actual = actual;
@@ -81,22 +86,23 @@ public class Chart {
         }
     }
 
-    public Chart(ChartResponse chartResponse) {
-        AtomicReference<Optional<Data>> previousData = new AtomicReference<>(null);
+    public EconomyChart(ChartResponse chartResponse, EconomyChartType economyChartType) {
+        this.type = economyChartType;
+        AtomicReference<Optional<IndicatorData>> previousData = new AtomicReference<>(null);
 
         this.content = chartResponse.getAttr().stream().map(attr -> {
-            Data data = new Data(
-                    Optional.ofNullable(attr.getActualState()).orElse(null),
-                    Optional.ofNullable(attr.getActual()).orElse(null),
-                    Optional.ofNullable(attr.getActualFormatted()).orElse(null),
-                    Optional.ofNullable(attr.getForecast()).orElse(null),
-                    Optional.ofNullable(attr.getForecastFormatted()).orElse(null),
-                    previousData.get() != null ? previousData.get().orElseThrow().actual : null,
-                    previousData.get() != null ? previousData.get().orElseThrow().actualFormatted : null,
-                    Optional.ofNullable(attr.getTimestamp().toInstant().atZone(ZoneId.of("Asia/Seoul"))).orElse(null)
+            IndicatorData indicatorData = new IndicatorData(
+                Optional.ofNullable(attr.getActualState()).orElse(null),
+                Optional.ofNullable(attr.getActual()).orElse(null),
+                Optional.ofNullable(attr.getActualFormatted()).orElse(null),
+                Optional.ofNullable(attr.getForecast()).orElse(null),
+                Optional.ofNullable(attr.getForecastFormatted()).orElse(null),
+                previousData.get() != null ? previousData.get().orElseThrow().actual : null,
+                previousData.get() != null ? previousData.get().orElseThrow().actualFormatted : null,
+                Optional.ofNullable(attr.getTimestamp().toInstant().atZone(ZoneId.of("Asia/Seoul"))).orElse(null)
             );
-            previousData.set(Optional.of(data));
-            return data;
+            previousData.set(Optional.of(indicatorData));
+            return indicatorData;
         }).collect(Collectors.toList());
     }
 }

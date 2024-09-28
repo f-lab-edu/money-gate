@@ -2,39 +2,40 @@ package com.joonhee.moneygate.chart.service;
 
 import com.joonhee.moneygate.chart.port.out.InflationIndicatorFeignClient;
 import com.joonhee.moneygate.chart.usecase.InflationIndicator;
-import com.joonhee.moneygate.chart.vo.Chart;
+import com.joonhee.moneygate.chart.vo.EconomyChart;
+import com.joonhee.moneygate.chart.vo.EconomyChartType;
 
 public class InflationIndicatorProcessor implements InflationIndicator {
     private final InflationIndicatorFeignClient inflationIndicatorInvestingComPort;
 
     public InflationIndicatorProcessor(
-            InflationIndicatorFeignClient inflationIndicatorInvestingComPort
+        InflationIndicatorFeignClient inflationIndicatorInvestingComPort
     ) {
         this.inflationIndicatorInvestingComPort = inflationIndicatorInvestingComPort;
     }
 
     @Override
-    public Chart getCoreCpi() {
-        return new Chart(inflationIndicatorInvestingComPort.getCoreCpi());
+    public EconomyChart getCoreCpi() {
+        return new EconomyChart(inflationIndicatorInvestingComPort.getCoreCpi(), EconomyChartType.CORE_CPI);
     }
 
     @Override
-    public Chart getCpi() {
-        return new Chart(inflationIndicatorInvestingComPort.getCpi());
+    public EconomyChart getCpi() {
+        return new EconomyChart(inflationIndicatorInvestingComPort.getCpi(), EconomyChartType.CPI);
     }
 
     @Override
-    public Chart getCorePpi() {
-        return new Chart(inflationIndicatorInvestingComPort.getCorePpi());
+    public EconomyChart getCorePpi() {
+        return new EconomyChart(inflationIndicatorInvestingComPort.getCorePpi(), EconomyChartType.PPI);
     }
 
     @Override
-    public Chart getEmploymentCostIndex() {
-        return new Chart(inflationIndicatorInvestingComPort.getEmploymentCostIndex());
+    public EconomyChart getEmploymentCostIndex() {
+        return new EconomyChart(inflationIndicatorInvestingComPort.getEmploymentCostIndex(), EconomyChartType.EMPLOYMENT_COST_INDEX);
     }
 
     @Override
-    public Chart getAverageHourlyEarnings() {
-        return new Chart(inflationIndicatorInvestingComPort.getAverageHourlyEarnings());
+    public EconomyChart getAverageHourlyEarnings() {
+        return new EconomyChart(inflationIndicatorInvestingComPort.getAverageHourlyEarnings(), EconomyChartType.AVERAGE_HOURLY_EARNINGS);
     }
 }

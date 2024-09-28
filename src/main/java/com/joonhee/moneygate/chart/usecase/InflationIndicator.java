@@ -1,11 +1,11 @@
 package com.joonhee.moneygate.chart.usecase;
 
-import com.joonhee.moneygate.chart.vo.Chart;
+import com.joonhee.moneygate.chart.vo.EconomyChart;
 
 public interface InflationIndicator {
-    Chart getCoreCpi();
-    Chart getCpi();
-    Chart getCorePpi();
-    Chart getEmploymentCostIndex();
-    Chart getAverageHourlyEarnings();
+    EconomyChart getCoreCpi();
+    EconomyChart getCpi();
+    EconomyChart getCorePpi();
+    EconomyChart getEmploymentCostIndex();
+    EconomyChart getAverageHourlyEarnings();
 }

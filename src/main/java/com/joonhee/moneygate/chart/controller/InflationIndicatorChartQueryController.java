@@ -2,7 +2,7 @@ package com.joonhee.moneygate.chart.controller;
 
 
 import com.joonhee.moneygate.chart.usecase.LeadingIndicator;
-import com.joonhee.moneygate.chart.vo.Chart;
+import com.joonhee.moneygate.chart.vo.EconomyChart;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,55 +19,55 @@ public class InflationIndicatorChartQueryController {
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/cb-consumer")
-    Chart getCbConsumer() {
+    EconomyChart getCbConsumer() {
         return leadingIndicator.getCbConsumer();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/pce-price-index")
-    Chart getPcePriceIndex() {
+    EconomyChart getPcePriceIndex() {
         return leadingIndicator.getPcePriceIndex();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/personal-income")
-    Chart getPersonalIncome() {
+    EconomyChart getPersonalIncome() {
         return leadingIndicator.getPersonalIncome();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/retail-sales")
-    Chart getRetailSales() {
+    EconomyChart getRetailSales() {
         return leadingIndicator.getRetailSales();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/new-home-sales")
-    Chart getNewHomeSales() {
+    EconomyChart getNewHomeSales() {
         return leadingIndicator.getNewHomeSales();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/existing-home-sales")
-    Chart getExistingHomeSales() {
+    EconomyChart getExistingHomeSales() {
         return leadingIndicator.getExistingHomeSales();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/all-car-sales")
-    Chart getAllCarSales() {
+    EconomyChart getAllCarSales() {
         return leadingIndicator.getAllCarSales();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/ism-manufacturing-pmi")
-    Chart getIsmManufacturingPmi() {
+    EconomyChart getIsmManufacturingPmi() {
         return leadingIndicator.getIsmManufacturingPMI();
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/manufacturing-pmi")
-    Chart getManufacturingPmi() {
+    EconomyChart getManufacturingPmi() {
         return leadingIndicator.getManufacturingPMI();
     }
 }
