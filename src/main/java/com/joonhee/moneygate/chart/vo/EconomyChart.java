@@ -2,6 +2,7 @@ package com.joonhee.moneygate.chart.vo;
 
 import com.joonhee.moneygate.chart.port.out.ActualState;
 import com.joonhee.moneygate.chart.port.out.ChartResponse;
+import lombok.Getter;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -10,19 +11,12 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-
+@Getter
 public class EconomyChart {
     private final EconomyChartType type;
     private List<IndicatorData> content;
 
-    public EconomyChartType getType() {
-        return type;
-    }
-
-    public List<IndicatorData> getContent() {
-        return List.copyOf(content);
-    }
-
+    @Getter
     public class IndicatorData {
         private ActualState actualState;
         private Double actual;
@@ -51,38 +45,6 @@ public class EconomyChart {
             this.previous = previous;
             this.previousFormatted = previousFormatted;
             this.announcedAt = announcedAt;
-        }
-
-        public ActualState getActualState() {
-            return actualState;
-        }
-
-        public Double getActual() {
-            return actual;
-        }
-
-        public String getActualFormatted() {
-            return actualFormatted;
-        }
-
-        public Double getForecast() {
-            return forecast;
-        }
-
-        public String getForecastFormatted() {
-            return forecastFormatted;
-        }
-
-        public Double getPrevious() {
-            return previous;
-        }
-
-        public String getPreviousFormatted() {
-            return previousFormatted;
-        }
-
-        public ZonedDateTime getAnnouncedAt() {
-            return announcedAt;
         }
     }
 
