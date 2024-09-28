@@ -1,6 +1,7 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.mentor.domain.entity.Mentor;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
@@ -43,7 +44,8 @@ class QueryNewsFeedServiceTest {
 
     NewsFeed createDummyNewsFeed() {
         Mentor mentor = new Mentor("이준희", "joonhee@google.com", "https://avatars.githubusercontent.com/u/77449822?v=4");
-        NewsFeed newsFeed = new NewsFeed(mentor, "오늘은 무엇을 할까요?");
+        NewsFeed newsFeed = new NewsFeed(mentor, "오늘은 무엇을 할까요?", ContentStatus.ACTIVE);
+
         return newsFeedRepository.save(newsFeed);
     }
 }

@@ -10,15 +10,18 @@ public class NewsFeed {
     private final UUID key;
     private final Mentor mentor;
     private String body;
+    private ContentStatus status;
     private ZonedDateTime deletedAt;
 
     public NewsFeed(
         Mentor mentor,
-        String body
+        String body,
+        ContentStatus status
     ) {
         this.key = UUID.randomUUID();
         this.mentor = mentor;
         this.body = body;
+        this.status = status;
     }
 
     public UUID getKey() {
@@ -34,7 +37,7 @@ public class NewsFeed {
     }
 
     public Boolean isDeleted() {
-        return deletedAt != null;
+        return this.status == ContentStatus.DELETED;
     }
 
 
@@ -45,6 +48,7 @@ public class NewsFeed {
 
     public NewsFeed delete() {
         this.deletedAt = ZonedDateTime.now();
+        this.status = ContentStatus.DELETED;
         return this;
     }
 }

@@ -12,7 +12,7 @@ class NewsFeedTest {
         // Arrange
         Mentor mentor = new Mentor("이준희", "joonhee@google.com", "https://avatars.githubusercontent.com/u/77449822?v=4");
         // Action
-        NewsFeed newsFeed = new NewsFeed(mentor, "오늘은 무엇을 할까요?");
+        NewsFeed newsFeed = new NewsFeed(mentor, "오늘은 무엇을 할까요?", ContentStatus.ACTIVE);
         // Assert
         assertThat(newsFeed).isNotNull();
     }

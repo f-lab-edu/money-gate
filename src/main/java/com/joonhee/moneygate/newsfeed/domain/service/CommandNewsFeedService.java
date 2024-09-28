@@ -2,6 +2,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.mentor.domain.entity.Mentor;
 import com.joonhee.moneygate.mentor.domain.repository.MentorRepository;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 
@@ -22,7 +23,7 @@ public class CommandNewsFeedService {
 
     public NewsFeed createNewsFeed(Long mentorId, String body) {
         Mentor mentor = mentorRepository.findById(mentorId);
-        return newsFeedRepository.save(new NewsFeed(mentor, body));
+        return newsFeedRepository.save(new NewsFeed(mentor, body, ContentStatus.ACTIVE));
     }
 
     public NewsFeed deleteNewsFeed(UUID newsFeedKey) {
