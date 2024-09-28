@@ -55,7 +55,6 @@ class CommandNewsFeedServiceTest {
     void 뉴스피드_삭제하기() {
         // Arrange
         NewsFeed createdNewsFeed = createDummyNewsFeed();
-
         // Action
         NewsFeed deletedNewsFeed = this.commandNewsFeedUseCase.deleteNewsFeed(createdNewsFeed.getKey());
         // Assert
