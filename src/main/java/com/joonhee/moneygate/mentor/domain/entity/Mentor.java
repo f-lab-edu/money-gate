@@ -5,16 +5,17 @@ import com.joonhee.moneygate.mentor.domain.vo.MentorId;
 import java.util.UUID;
 
 public class Mentor {
-    private MentorId id;
+    private final Long id = 1L;
+    private final String email;
     private final String nickName;
     private final String profileImage;
 
-    public MentorId getMentorId() {
+    public Long getMentorId() {
         return id;
     }
 
-    public Mentor(String nickName, String profileImage) {
-        this.id = new MentorId(UUID.randomUUID());
+    public Mentor(String nickName, String email,String profileImage) {
+        this.email = email;
         this.nickName = nickName;
         this.profileImage = profileImage;
     }

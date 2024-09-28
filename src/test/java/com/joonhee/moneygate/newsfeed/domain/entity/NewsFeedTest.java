@@ -10,7 +10,7 @@ class NewsFeedTest {
     @Test
     void 뉴스피드에_작성하기() {
         // Arrange
-        Mentor mentor = new Mentor("이준희", "https://avatars.githubusercontent.com/u/77449822?v=4");
+        Mentor mentor = new Mentor("이준희", "joonhee@google.com", "https://avatars.githubusercontent.com/u/77449822?v=4");
         // Action
         NewsFeed newsFeed = new NewsFeed(mentor, "오늘은 무엇을 할까요?");
         // Assert

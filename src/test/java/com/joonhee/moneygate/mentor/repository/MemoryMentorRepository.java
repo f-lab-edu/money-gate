@@ -7,7 +7,7 @@ import com.joonhee.moneygate.mentor.domain.vo.MentorId;
 import java.util.HashMap;
 
 public class MemoryMentorRepository implements MentorRepository {
-    HashMap<MentorId, Mentor> mentors = new HashMap<>();
+    HashMap<Long, Mentor> mentors = new HashMap<>();
 
     @Override
     public Mentor save(Mentor mentor) {
@@ -16,7 +16,7 @@ public class MemoryMentorRepository implements MentorRepository {
     }
 
     @Override
-    public Mentor findById(MentorId id) {
+    public Mentor findById(Long id) {
         return mentors.get(id);
     }
 }
