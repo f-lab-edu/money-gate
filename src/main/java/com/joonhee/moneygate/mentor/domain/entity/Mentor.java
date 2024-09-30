@@ -10,13 +10,13 @@ public class Mentor {
     private final String nickName;
     private final String profileImage;
 
-    public Long getMentorId() {
-        return id;
-    }
-
     public Mentor(String nickName, String email,String profileImage) {
         this.email = email;
         this.nickName = nickName;
         this.profileImage = profileImage;
+    }
+
+    public Long getMentorId() {
+        return id;
     }
 }
