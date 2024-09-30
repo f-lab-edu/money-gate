@@ -7,7 +7,7 @@ import com.joonhee.moneygate.mentor.domain.vo.MentorId;
 import java.util.HashMap;
 
 public class MemoryMentorRepository implements MentorRepository {
-    HashMap<Long, Mentor> mentors = new HashMap<>();
+    private final HashMap<Long, Mentor> mentors = new HashMap<>();
 
     @Override
     public Mentor save(Mentor mentor) {
