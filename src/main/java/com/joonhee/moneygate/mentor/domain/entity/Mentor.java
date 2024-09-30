@@ -1,9 +1,6 @@
 package com.joonhee.moneygate.mentor.domain.entity;
 
-import org.springframework.data.annotation.Id;
-
 public class Mentor {
-    @Id
     private Long id;
     private final String email;
     private final String nickName;
