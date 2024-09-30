@@ -3,9 +3,9 @@ package com.joonhee.moneygate.chart.port.out;
 import lombok.Getter;
 
 import java.util.List;
-public class ChartResponse {
+public class InvestingComChartResponse {
     private List<List<Object>> data;
 
     @Getter
-    private List<Attr> attr;
+    private List<AnnouncedActualForecastValue> attr;
 }

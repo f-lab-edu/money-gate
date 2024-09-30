@@ -1,7 +1,6 @@
 package com.joonhee.moneygate.chart.vo;
 
-import com.joonhee.moneygate.chart.port.out.ActualState;
-import com.joonhee.moneygate.chart.port.out.ChartResponse;
+import com.joonhee.moneygate.chart.port.out.InvestingComChartResponse;
 import lombok.Getter;
 
 import java.time.ZoneId;
@@ -18,7 +17,7 @@ public class EconomyChart {
 
     @Getter
     public class IndicatorData {
-        private ActualState actualState;
+        private CompareActualToForecastStatus compareActualToForecastStatus;
         private Double actual;
         private String actualFormatted;
         private Double forecast;
@@ -28,7 +27,7 @@ public class EconomyChart {
         private ZonedDateTime announcedAt;
 
         public IndicatorData(
-            ActualState actualState,
+            CompareActualToForecastStatus compareActualToForecastStatus,
             Double actual,
             String actualFormatted,
             Double forecast,
@@ -37,7 +36,7 @@ public class EconomyChart {
             String previousFormatted,
             ZonedDateTime announcedAt
         ) {
-            this.actualState = actualState;
+            this.compareActualToForecastStatus = compareActualToForecastStatus;
             this.actual = actual;
             this.actualFormatted = actualFormatted;
             this.forecast = forecast;
@@ -48,13 +47,14 @@ public class EconomyChart {
         }
     }
 
-    public EconomyChart(ChartResponse chartResponse, EconomyChartType economyChartType) {
+    public EconomyChart(InvestingComChartResponse investingComChartResponse, EconomyChartType economyChartType) {
         this.type = economyChartType;
         AtomicReference<Optional<IndicatorData>> previousData = new AtomicReference<>(null);
 
-        this.content = chartResponse.getAttr().stream().map(attr -> {
+        this.content = investingComChartResponse.getAttr().stream().map(attr -> {
+
             IndicatorData indicatorData = new IndicatorData(
-                Optional.ofNullable(attr.getActualState()).orElse(null),
+                Optional.ofNullable(CompareActualToForecastStatus.valueOf(attr.getActualState())).orElse(null),
                 Optional.ofNullable(attr.getActual()).orElse(null),
                 Optional.ofNullable(attr.getActualFormatted()).orElse(null),
                 Optional.ofNullable(attr.getForecast()).orElse(null),

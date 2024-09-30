@@ -8,9 +8,9 @@ import java.util.Date;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Getter
-public class Attr {
+public class AnnouncedActualForecastValue {
     private Date timestamp;
-    private ActualState actualState;
+    private String actualState;
     private double actual;
     private String actualFormatted;
     private double forecast;
