@@ -1,9 +1,5 @@
 package com.joonhee.moneygate.mentor.domain.entity;
 
-import com.joonhee.moneygate.mentor.domain.vo.MentorId;
-
-import java.util.UUID;
-
 public class Mentor {
     private final Long id = 1L;
     private final String email;
