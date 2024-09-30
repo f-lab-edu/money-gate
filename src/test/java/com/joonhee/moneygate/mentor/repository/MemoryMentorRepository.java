@@ -2,7 +2,6 @@ package com.joonhee.moneygate.mentor.repository;
 
 import com.joonhee.moneygate.mentor.domain.entity.Mentor;
 import com.joonhee.moneygate.mentor.domain.repository.MentorRepository;
-import com.joonhee.moneygate.mentor.domain.vo.MentorId;
 
 import java.util.HashMap;
 
