@@ -7,6 +7,7 @@ import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,7 +29,8 @@ class CommandNewsFeedServiceTest {
     }
 
     @Test
-    void 뉴스피드_생성하기() {
+    @DisplayName("뉴스피드 생성하기")
+    void create() {
         // Arrange, Action
         NewsFeed createdNewsFeed = createDummyNewsFeed();
 
@@ -39,7 +41,8 @@ class CommandNewsFeedServiceTest {
     }
 
     @Test
-    void 뉴스피드_수정하기() {
+    @DisplayName("뉴스피드 수정하기")
+    void update() {
         // Arrange
         NewsFeed createdNewsFeed = createDummyNewsFeed();
         String changedBody = "내용을 변경합니다";
@@ -52,7 +55,8 @@ class CommandNewsFeedServiceTest {
     }
 
     @Test
-    void 뉴스피드_삭제하기() {
+    @DisplayName("뉴스피드 삭제하기")
+    void delete() {
         // Arrange
         NewsFeed createdNewsFeed = createDummyNewsFeed();
         // Action

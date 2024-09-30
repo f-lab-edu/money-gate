@@ -6,6 +6,7 @@ import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -23,7 +24,8 @@ class QueryNewsFeedServiceTest {
     }
 
     @Test
-    void 모든_뉴스피드조회() {
+    @DisplayName("모든 뉴스피드 조회하기")
+    void findAll() {
         // Arrange
         createDummyNewsFeed();
         // Action
@@ -33,7 +35,8 @@ class QueryNewsFeedServiceTest {
     }
 
     @Test
-    void 특정_뉴스피드_조회하기() {
+    @DisplayName("특정 뉴스피드 조회하기")
+    void getSpecificItem() {
         // Arrange
         NewsFeed createdNewsFeed = createDummyNewsFeed();
         // Action
