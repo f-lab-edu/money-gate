@@ -54,7 +54,7 @@ public class EconomyChart {
         this.content = investingComChartResponse.getAttr().stream().map(attr -> {
 
             IndicatorData indicatorData = new IndicatorData(
-                Optional.ofNullable(CompareActualToForecastStatus.valueOf(attr.getActualState())).orElse(null),
+                Optional.ofNullable(CompareActualToForecastStatus.from(attr.getActualState())).orElse(null),
                 Optional.ofNullable(attr.getActual()).orElse(null),
                 Optional.ofNullable(attr.getActualFormatted()).orElse(null),
                 Optional.ofNullable(attr.getForecast()).orElse(null),
