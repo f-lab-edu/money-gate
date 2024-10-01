@@ -1,0 +1,16 @@
+investing:
+  com:
+    src: "https://sbcharts.investing.com/events_charts/us"
+
+springdoc:
+  swagger-ui:
+    path:"/swagger"
+
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 2000
+            readTimeout: 1000
