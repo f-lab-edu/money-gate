@@ -2,7 +2,7 @@
 name: 🚀 PR Template
 about: PR 템플릿입니다.
 title: "[🚀FEAT]"
-projects: ["f-lab-edu/MoneyGateProject"]
+projects: ["f-lab-edu/277"]
 assignees: 
   - Marc416
 
