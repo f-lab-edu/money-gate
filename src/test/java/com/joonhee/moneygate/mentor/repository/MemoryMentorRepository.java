@@ -10,7 +10,7 @@ public class MemoryMentorRepository implements MentorRepository {
 
     @Override
     public Mentor save(Mentor mentor) {
-        mentors.put(mentor.getMentorId(), mentor);
+        mentors.put(mentor.getId(), mentor);
         return mentor;
     }
 
