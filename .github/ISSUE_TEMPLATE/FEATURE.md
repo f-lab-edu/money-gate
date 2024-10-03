@@ -3,7 +3,7 @@ name: "\U0001F4A1 Feature"
 about: 기능 설명 및 구현입니다.
 title: "[\U0001F4A1 FEAT]"
 labels: feature
-projects: ["f-lab-edu/MoneyGateProject"]
+projects: ["f-lab-edu/277"]
 assignees: 
   - Marc416
 

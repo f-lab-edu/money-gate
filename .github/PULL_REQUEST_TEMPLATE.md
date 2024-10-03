@@ -1,13 +1,3 @@
----
-name: 🚀 PR Template
-about: PR 템플릿입니다.
-title: "[🚀FEAT]"
-projects: ["f-lab-edu/MoneyGateProject"]
-assignees: 
-  - Marc416
-
----
-
 ## 📸 이슈번호
 - close #(이슈번호)
 
