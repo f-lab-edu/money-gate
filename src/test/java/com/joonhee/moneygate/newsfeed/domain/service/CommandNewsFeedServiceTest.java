@@ -72,7 +72,7 @@ class CommandNewsFeedServiceTest {
                 "joobhee@google.com",
                 "https://avatars.githubusercontent.com/u/77449822?v=4")
         );
-        return this.commandNewsFeedUseCase.createNewsFeed(mentor.getMentorId(), null);
+        return this.commandNewsFeedUseCase.createNewsFeed(mentor.getId(), null);
     }
 
 }

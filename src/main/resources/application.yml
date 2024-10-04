@@ -7,6 +7,11 @@ springdoc:
     path:"/swagger"
 
 spring:
+  datasource:
+    url: jdbc:mysql://localhost:13306/dev
+    username: joonhee
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
   cloud:
     openfeign:
       client:

@@ -1,6 +1,13 @@
 package com.joonhee.moneygate.mentor.domain.entity;
 
+import lombok.Getter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+
+@Getter
 public class Mentor {
+    @Id
+    @Column("mentor_id")
     private Long id;
     private final String email;
     private final String nickName;
@@ -10,9 +17,5 @@ public class Mentor {
         this.email = email;
         this.nickName = nickName;
         this.profileImage = profileImage;
-    }
-
-    public Long getMentorId() {
-        return id;
     }
 }
