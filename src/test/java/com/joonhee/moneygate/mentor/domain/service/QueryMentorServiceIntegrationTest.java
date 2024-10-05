@@ -11,24 +11,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class CreateMentorServiceIntegrationTest {
-
+class QueryMentorServiceIntegrationTest {
     @Autowired
     private CreateMentorService createMentorService;
+    @Autowired
+    private QueryMentorService queryMentorService;
 
     @Test
-    @DisplayName("멘토 생성")
-    void createMentor() {
+    @DisplayName("멘토 조회")
+    void findById() {
         // Arrange
         String nickName = "joonheeTest";
-        String email = "joonheeTest@abc.com";
+        String email = "jonnheeTest@abc.com";
         String profileImage = "https://joonhee.com";
+        Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
+        Long id = mentor.getId();
 
         // Action
-        Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
+        Mentor foundMentor = queryMentorService.findById(id);
 
         // Assert
-        assertThat(mentor.getId()).isNotNull();
-
+        assertThat(mentor.getId()).isEqualTo(foundMentor.getId());
     }
+
+
 }
