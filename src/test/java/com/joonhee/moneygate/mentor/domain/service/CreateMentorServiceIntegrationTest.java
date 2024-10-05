@@ -17,15 +17,17 @@ class CreateMentorServiceIntegrationTest {
     private CreateMentorService createMentorService;
 
     @Test
-    @DisplayName("멘토 생성 테스트")
+    @DisplayName("멘토 생성")
     void createMentor() {
-        // given
+        // Arrange
         String nickName = "joonhee11";
         String email = "joonhee@abc11.com";
         String profileImage = "https://joonhee.com";
 
-        // when
+        // Action
         Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
+
+        // Assert
         assertThat(mentor.getId()).isNotNull();
 
     }
