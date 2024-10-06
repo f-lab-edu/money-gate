@@ -29,7 +29,7 @@ public class NewsFeed {
     }
 
     public Long getMentorId() {
-        return mentor.getMentorId();
+        return mentor.getId();
     }
 
     public String getBody() {
