@@ -10,5 +10,7 @@ public interface NewsFeedRepository {
 
     NewsFeed findByKey(UUID newsFeedKey);
 
+    List<NewsFeed> findAllPublic();
+
     List<NewsFeed> findAll();
 }

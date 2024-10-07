@@ -25,29 +25,39 @@ public class CommandNewsFeedService {
 
     public NewsFeed createNewsFeedByPublic(Long mentorId, String body) {
         Mentor mentor = mentorRepository.findById(mentorId);
+        validateMentor(mentor);
         return newsFeedRepository.save(new NewsFeed(mentor.getId(), body, ContentStatus.PUBLIC));
     }
 
     public NewsFeed createNewsFeedByDraft(Long mentorId, String body) {
         Mentor mentor = mentorRepository.findById(mentorId);
+        validateMentor(mentor);
         return newsFeedRepository.save(new NewsFeed(mentor.getId(), body, ContentStatus.DRAFT));
     }
 
     public NewsFeed deleteNewsFeed(UUID newsFeedKey) {
         NewsFeed newsFeed = newsFeedRepository.findByKey(newsFeedKey);
-        if (newsFeed == null) {
-            throw new IllegalArgumentException("NewsFeed not found");
-        }
+        validateNewsFeed(newsFeed);
         newsFeed.delete();
         return newsFeedRepository.save(newsFeed);
     }
 
     public NewsFeed updateNewsFeed(UUID newsFeedKey, String body) {
         NewsFeed newsFeed = newsFeedRepository.findByKey(newsFeedKey);
-        if (newsFeed == null) {
-            throw new IllegalArgumentException("NewsFeed not found");
-        }
+        validateNewsFeed(newsFeed);
         newsFeed.updateBody(body);
         return newsFeedRepository.save(newsFeed);
+    }
+
+    private void validateMentor(Mentor mentor) {
+        if(mentor == null) {
+            throw new IllegalArgumentException("Mentor not found");
+        }
+    }
+
+    private void validateNewsFeed(NewsFeed newsFeed) {
+        if(newsFeed == null) {
+            throw new IllegalArgumentException("NewsFeed not found");
+        }
     }
 }

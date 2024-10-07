@@ -1,5 +1,6 @@
 package com.joonhee.moneygate.newsfeed.repository;
 
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 
@@ -19,6 +20,14 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
     @Override
     public NewsFeed findByKey(UUID newsFeedKey) {
         return newsFeeds.get(newsFeedKey);
+    }
+
+    @Override
+    public List<NewsFeed> findAllPublic() {
+
+        return newsFeeds.values().stream()
+            .filter(newsFeed -> newsFeed.getStatus().equals(ContentStatus.PUBLIC))
+            .toList();
     }
 
     @Override

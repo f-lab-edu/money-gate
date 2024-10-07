@@ -1,13 +1,13 @@
 package com.joonhee.moneygate.newsfeed.application;
 
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Repository
 public class NewsFeedRepositoryImpl implements NewsFeedRepository {
@@ -28,7 +28,13 @@ public class NewsFeedRepositoryImpl implements NewsFeedRepository {
     }
 
     @Override
+    public List<NewsFeed> findAllPublic() {
+        return crudNewsFeedRepository.findAllByStatusOrderByCreatedAtDesc(ContentStatus.PUBLIC.name());
+    }
+
+    @Override
     public List<NewsFeed> findAll() {
-        return StreamSupport.stream(crudNewsFeedRepository.findAll().spliterator(), false).collect(Collectors.toList());
+        Sort sort = Sort.by(Sort.Order.desc("createdAt"));
+        return crudNewsFeedRepository.findAll(sort);
     }
 }

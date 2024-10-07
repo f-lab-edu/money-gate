@@ -1,9 +1,12 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
+import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +19,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class QueryNewsFeedServiceTest {
     QueryNewsFeedService queryNewsFeedService;
     NewsFeedRepository newsFeedRepository;
+    MentorRepository mentorRepository;
 
     @BeforeEach
     void setUp() {
         this.newsFeedRepository = new MemoryNewsFeedRepository();
-        this.queryNewsFeedService = new QueryNewsFeedService(newsFeedRepository);
+        this.mentorRepository = new MemoryMentorRepository();
+        this.queryNewsFeedService = new QueryNewsFeedService(newsFeedRepository, mentorRepository);
     }
 
     @Test
@@ -29,7 +34,7 @@ class QueryNewsFeedServiceTest {
         // Arrange
         createDummyNewsFeed();
         // Action
-        List<NewsFeed> newsFeeds = queryNewsFeedService.findAllNewsFeeds();
+        List<NewsFeedDetail> newsFeeds = queryNewsFeedService.findAllPublic();
         // Assert
         assertThat(newsFeeds.size()).isEqualTo(1);
     }
@@ -47,6 +52,7 @@ class QueryNewsFeedServiceTest {
 
     NewsFeed createDummyNewsFeed() {
         Mentor mentor = new Mentor("이준희", "joonhee@google.com", "https://avatars.githubusercontent.com/u/77449822?v=4");
+        mentorRepository.save(mentor);
         NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentStatus.PUBLIC);
 
         return newsFeedRepository.save(newsFeed);
