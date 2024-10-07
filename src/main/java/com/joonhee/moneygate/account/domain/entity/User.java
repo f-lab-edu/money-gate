@@ -1,4 +1,4 @@
-package com.joonhee.moneygate.mentor.domain.entity;
+package com.joonhee.moneygate.account.domain.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,25 +9,17 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class Mentor {
+public class User {
     @Id
-    @Column("mentor_id")
+    @Column("user_id")
     private Long id;
-    private String email;
-    private String nickName;
-    private String profileImage;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    String email;
+    String nickName;
+    String profileImage;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 
-    public Mentor(String nickName, String email, String profileImage) {
-        validateEmail(email);
-        this.email = email;
-        this.nickName = nickName;
-        this.profileImage = profileImage;
-        this.createdAt = LocalDateTime.now();
-    }
-
-    private void validateEmail(String email) {
+    void validateEmail(String email) {
         String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
         if (email == null || email.isEmpty()) {

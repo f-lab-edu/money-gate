@@ -1,39 +1,39 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
+@NoArgsConstructor
 public class NewsFeed {
-    private final Long id = 1L;     // AUTO_INCREMENT
-    private final UUID key;
-    private final Mentor mentor;
+    @Id
+    @Column("news_feed_id")
+    private Long id;
+    @Column("news_feed_key")
+    private UUID key;
+    @Column("user_id")
+    private Long mentorId;
     private String body;
     private ContentStatus status;
-    private ZonedDateTime deletedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public NewsFeed(
-        Mentor mentor,
+        Long mentorId,
         String body,
         ContentStatus status
     ) {
         this.key = UUID.randomUUID();
-        this.mentor = mentor;
+        this.mentorId = mentorId;
         this.body = body;
         this.status = status;
-    }
-
-    public UUID getKey() {
-        return key;
-    }
-
-    public Long getMentorId() {
-        return mentor.getId();
-    }
-
-    public String getBody() {
-        return body;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Boolean isDeleted() {
@@ -43,11 +43,12 @@ public class NewsFeed {
 
     public NewsFeed updateBody(String body) {
         this.body = body;
+        this.updatedAt = LocalDateTime.now();
         return this;
     }
 
     public NewsFeed delete() {
-        this.deletedAt = ZonedDateTime.now();
+        this.deletedAt = LocalDateTime.now();
         this.status = ContentStatus.DELETED;
         return this;
     }

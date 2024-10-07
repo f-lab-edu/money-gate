@@ -1,6 +1,6 @@
-package com.joonhee.moneygate.mentor.application;
+package com.joonhee.moneygate.account.application;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.Mentor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

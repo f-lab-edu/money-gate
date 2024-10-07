@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.Mentor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ class NewsFeedTest {
         // Arrange
         Mentor mentor = new Mentor("이준희", "joonhee@google.com", "https://avatars.githubusercontent.com/u/77449822?v=4");
         // Action
-        NewsFeed newsFeed = new NewsFeed(mentor, "오늘은 무엇을 할까요?", ContentStatus.ACTIVE);
+        NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentStatus.PUBLIC);
         // Assert
         assertThat(newsFeed).isNotNull();
     }

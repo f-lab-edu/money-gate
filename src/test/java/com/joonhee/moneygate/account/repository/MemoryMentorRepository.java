@@ -1,7 +1,7 @@
-package com.joonhee.moneygate.mentor.repository;
+package com.joonhee.moneygate.account.repository;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
-import com.joonhee.moneygate.mentor.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 
 import java.util.HashMap;
 

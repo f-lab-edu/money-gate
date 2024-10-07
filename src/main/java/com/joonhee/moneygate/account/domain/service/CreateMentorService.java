@@ -1,7 +1,7 @@
-package com.joonhee.moneygate.mentor.domain.service;
+package com.joonhee.moneygate.account.domain.service;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
-import com.joonhee.moneygate.mentor.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 import org.springframework.stereotype.Service;
 
 @Service

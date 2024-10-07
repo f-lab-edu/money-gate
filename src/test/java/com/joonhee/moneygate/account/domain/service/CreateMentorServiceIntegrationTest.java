@@ -1,6 +1,6 @@
-package com.joonhee.moneygate.mentor.domain.service;
+package com.joonhee.moneygate.account.domain.service;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.Mentor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +11,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class QueryMentorServiceIntegrationTest {
+class CreateMentorServiceIntegrationTest {
+
     @Autowired
     private CreateMentorService createMentorService;
-    @Autowired
-    private QueryMentorService queryMentorService;
 
     @Test
-    @DisplayName("멘토 조회")
-    void findById() {
+    @DisplayName("멘토 생성")
+    void createMentor() {
         // Arrange
         String nickName = "joonheeTest";
-        String email = "jonnheeTest@abc.com";
+        String email = "joonheeTest@abc.com";
         String profileImage = "https://joonhee.com";
-        Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
-        Long id = mentor.getId();
 
         // Action
-        Mentor foundMentor = queryMentorService.findById(id);
+        Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
 
         // Assert
-        assertThat(mentor.getId()).isEqualTo(foundMentor.getId());
+        assertThat(mentor.getId()).isNotNull();
+
     }
-
-
 }

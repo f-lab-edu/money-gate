@@ -17,20 +17,8 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
     }
 
     @Override
-    public NewsFeed findById(UUID id) {
-        return newsFeeds.get(id);
-    }
-
-    @Override
-    public NewsFeed update(UUID newsFeedId, String body) {
-        NewsFeed newsFeed = newsFeeds.get(newsFeedId);
-        return newsFeed.updateBody(body);
-    }
-
-    @Override
-    public NewsFeed delete(UUID id) {
-        NewsFeed newsFeed = newsFeeds.get(id);
-        return newsFeed.delete();
+    public NewsFeed findByKey(UUID newsFeedKey) {
+        return newsFeeds.get(newsFeedKey);
     }
 
     @Override

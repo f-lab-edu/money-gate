@@ -8,11 +8,7 @@ import java.util.UUID;
 public interface NewsFeedRepository {
     NewsFeed save(NewsFeed newsFeed);
 
-    NewsFeed findById(UUID id);
-
-    NewsFeed update(UUID newsFeedId, String body);
-
-    NewsFeed delete(UUID id);
+    NewsFeed findByKey(UUID newsFeedKey);
 
     List<NewsFeed> findAll();
 }

@@ -11,7 +11,7 @@ spring:
     url: jdbc:mysql://localhost:13306/dev
     username: joonhee
     password: 1234
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     openfeign:
       client:
