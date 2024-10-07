@@ -17,9 +17,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class QueryNewsFeedServiceTest {
-    QueryNewsFeedService queryNewsFeedService;
-    NewsFeedRepository newsFeedRepository;
-    MentorRepository mentorRepository;
+    private QueryNewsFeedService queryNewsFeedService;
+    private NewsFeedRepository newsFeedRepository;
+    private MentorRepository mentorRepository;
 
     @BeforeEach
     void setUp() {

@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CommandNewsFeedServiceTest {
-    CommandNewsFeedService commandNewsFeedUseCase;
-    MentorRepository mentorRepository;
-    NewsFeedRepository newsFeedRepository;
+    private CommandNewsFeedService commandNewsFeedUseCase;
+    private MentorRepository mentorRepository;
+    private NewsFeedRepository newsFeedRepository;
 
     @BeforeEach
     void setUp() {
