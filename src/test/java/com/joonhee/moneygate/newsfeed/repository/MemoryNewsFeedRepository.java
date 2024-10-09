@@ -3,6 +3,7 @@ package com.joonhee.moneygate.newsfeed.repository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
+import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,11 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
 
     @Override
     public NewsFeed findByKey(UUID newsFeedKey) {
-        return newsFeeds.get(newsFeedKey);
+        NewsFeed newsFeed = newsFeeds.get(newsFeedKey);
+        if (newsFeed == null) {
+            throw new NotFoundNewsFeedException(newsFeedKey.toString());
+        }
+        return newsFeed;
     }
 
     @Override

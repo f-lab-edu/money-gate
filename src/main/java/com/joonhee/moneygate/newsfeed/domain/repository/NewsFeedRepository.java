@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface NewsFeedRepository {
     NewsFeed save(NewsFeed newsFeed);
 
-    NewsFeed findByKey(UUID newsFeedKey);
+    NewsFeed findByKey(UUID newsFeedKey) throws IllegalArgumentException;
 
     List<NewsFeed> findAllPublic();
 

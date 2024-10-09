@@ -2,6 +2,7 @@ package com.joonhee.moneygate.account.application;
 
 import com.joonhee.moneygate.account.domain.entity.Mentor;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.exception.NotFoundMentorException;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,7 +20,7 @@ public class MentorRepositoryImpl implements MentorRepository {
     }
 
     @Override
-    public Mentor findById(Long id) {
-        return crudMentorRepository.findById(id).orElse(null);
+    public Mentor findById(Long id) throws IllegalArgumentException {
+        return crudMentorRepository.findById(id).orElseThrow(() -> new NotFoundMentorException(id));
     }
 }

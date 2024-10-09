@@ -3,6 +3,7 @@ package com.joonhee.moneygate.newsfeed.application;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
+import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +25,7 @@ public class NewsFeedRepositoryImpl implements NewsFeedRepository {
 
     @Override
     public NewsFeed findByKey(UUID newsFeedKey) {
-        return crudNewsFeedRepository.findByKey(newsFeedKey).orElse(null);
+        return crudNewsFeedRepository.findByKey(newsFeedKey).orElseThrow(() -> new NotFoundNewsFeedException(newsFeedKey.toString()));
     }
 
     @Override
