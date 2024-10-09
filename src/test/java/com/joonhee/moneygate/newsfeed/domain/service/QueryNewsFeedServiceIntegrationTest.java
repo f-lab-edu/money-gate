@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.service.CreateMentorService;
 import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,7 @@ public class QueryNewsFeedServiceIntegrationTest {
     void findAll() {
         // Arrange
         List<NewsFeedDetail> previousNewsFeeds = queryNewsFeedService.findAll();
-        Mentor mentor = createDummyMentor();
+        User mentor = createDummyMentor();
         commandNewsFeedService.createNewsFeedByPublic(mentor.getId(), "오늘은 무엇을 할까요?");
         commandNewsFeedService.createNewsFeedByPublic(mentor.getId(), "내일은 무엇을 할까요?");
         // Action
@@ -37,7 +37,7 @@ public class QueryNewsFeedServiceIntegrationTest {
         assertThat(afterNewsFeeds.size() - previousNewsFeeds.size()).isEqualTo(2);
     }
 
-    private Mentor createDummyMentor() {
+    private User createDummyMentor() {
         return createMentorService.createMentor("이준희",
             "joobhee@google.com",
             "https://avatars.githubusercontent.com/u/77449822?v=4");

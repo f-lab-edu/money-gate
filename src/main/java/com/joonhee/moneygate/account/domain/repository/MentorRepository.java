@@ -1,8 +1,8 @@
 package com.joonhee.moneygate.account.domain.repository;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 
 public interface MentorRepository {
-    Mentor save(Mentor mentor);
-    Mentor findById(Long id) throws IllegalArgumentException;
+    User save(User mentor);
+    User findById(Long id) throws IllegalArgumentException;
 }

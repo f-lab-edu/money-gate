@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
@@ -51,7 +51,10 @@ class QueryNewsFeedServiceTest {
     }
 
     NewsFeed createDummyNewsFeed() {
-        Mentor mentor = new Mentor("이준희", "joonhee@google.com", "https://avatars.githubusercontent.com/u/77449822?v=4");
+        String nickName = "joonheeTest";
+        String email = "joonhee@google.com";
+        String profileImage = "https://joonhee.com";
+        User mentor = User.createMentor(nickName, email, profileImage);
         mentorRepository.save(mentor);
         NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentStatus.PUBLIC);
 

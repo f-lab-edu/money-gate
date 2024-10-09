@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.account.domain.service;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +24,11 @@ class QueryMentorServiceIntegrationTest {
         String nickName = "joonheeTest";
         String email = "jonnheeTest@abc.com";
         String profileImage = "https://joonhee.com";
-        Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
+        User mentor = createMentorService.createMentor(nickName, email, profileImage);
         Long id = mentor.getId();
 
         // Action
-        Mentor foundMentor = queryMentorService.findById(id);
+        User foundMentor = queryMentorService.findById(id);
 
         // Assert
         assertThat(mentor.getId()).isEqualTo(foundMentor.getId());

@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.account.domain.service;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ class CreateMentorServiceIntegrationTest {
         String profileImage = "https://joonhee.com";
 
         // Action
-        Mentor mentor = createMentorService.createMentor(nickName, email, profileImage);
+        User mentor = createMentorService.createMentor(nickName, email, profileImage);
 
         // Assert
         assertThat(mentor.getId()).isNotNull();

@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
@@ -77,22 +77,23 @@ class CommandNewsFeedServiceTest {
     }
 
     private NewsFeed createDummyPublicNewsFeed() {
-        Mentor mentor = mentorRepository.save(createDummyMentorEntity());
+        User mentor = mentorRepository.save(createDummyMentorEntity());
         return this.commandNewsFeedUseCase.createNewsFeedByPublic(mentor.getId(), null);
     }
 
     private NewsFeed createDummyDraftNewsFeed() {
 
-        Mentor mentor = mentorRepository.save(
+        User mentor = mentorRepository.save(
             createDummyMentorEntity());
         return this.commandNewsFeedUseCase.createNewsFeedByDraft(mentor.getId(), null);
     }
 
-    private Mentor createDummyMentorEntity() {
+    private User createDummyMentorEntity() {
+        String nickName = "joonheeTest";
+        String email = "joobhee@google.com";
+        String profileImage = "https://avatars.githubusercontent.com/u/77449822?v=4";
         return mentorRepository.save(
-            new Mentor(
-                "이준희",
-                "joobhee@google.com",
-                "https://avatars.githubusercontent.com/u/77449822?v=4"));
+            User.createMentor(nickName, email, profileImage)
+        );
     }
 }

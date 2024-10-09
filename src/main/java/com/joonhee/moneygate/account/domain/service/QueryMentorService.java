@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.account.domain.service;
 
-import com.joonhee.moneygate.account.domain.entity.Mentor;
+import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class QueryMentorService {
         this.mentorRepository = mentorRepository;
     }
 
-    public Mentor findById(Long id) {
+    public User findById(Long id) {
         return mentorRepository.findById(id);
     }
 }

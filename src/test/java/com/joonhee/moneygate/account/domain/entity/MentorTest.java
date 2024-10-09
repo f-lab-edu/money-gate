@@ -17,7 +17,7 @@ class MentorTest {
         String profileImage = "https://joonhee.com";
 
         // Action
-        Mentor mentor = new Mentor(nickName, email, profileImage);
+        User mentor = User.createMentor(nickName, email, profileImage);
         // Assert
         assertThat(mentor.getNickName()).isEqualTo(nickName);
         assertThat(mentor.getEmail()).isEqualTo(email);
@@ -33,7 +33,7 @@ class MentorTest {
         String profileImage = "https://joonhee.com";
 
         // Action & Assert
-        assertThatThrownBy(() -> new Mentor(nickName, email, profileImage))
+        assertThatThrownBy(() -> User.createMentor(nickName, email, profileImage))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }
