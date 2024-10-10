@@ -23,12 +23,12 @@ public class CommandNewsFeedService {
 
     public NewsFeed createNewsFeedByPublic(Long mentorId, String body) {
         User mentor = mentorRepository.findById(mentorId);
-        return newsFeedRepository.save(new NewsFeed(mentor.getId(), body, ContentOpenStatus.PUBLIC));
+        return newsFeedRepository.save(NewsFeed.createNewsFeedByPublic(mentor.getId(), body));
     }
 
     public NewsFeed createNewsFeedByDraft(Long mentorId, String body) {
         User mentor = mentorRepository.findById(mentorId);
-        return newsFeedRepository.save(new NewsFeed(mentor.getId(), body, ContentOpenStatus.DRAFT));
+        return newsFeedRepository.save(NewsFeed.createNewsFeedByDraft(mentor.getId(), body));
     }
 
     public NewsFeed deleteNewsFeed(String newsFeedKey) {

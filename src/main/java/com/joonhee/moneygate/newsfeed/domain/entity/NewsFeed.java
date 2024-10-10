@@ -1,9 +1,5 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.databind.EnumNamingStrategies;
-import com.fasterxml.jackson.databind.EnumNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.EnumNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -28,7 +24,7 @@ public class NewsFeed {
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    public NewsFeed(
+    private NewsFeed(
         Long mentorId,
         String body,
         ContentOpenStatus status
@@ -38,6 +34,14 @@ public class NewsFeed {
         this.body = body;
         this.status = status;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public static NewsFeed createNewsFeedByPublic(Long mentorId, String body) {
+        return new NewsFeed(mentorId, body, ContentOpenStatus.PUBLIC);
+    }
+
+    public static NewsFeed createNewsFeedByDraft(Long mentorId, String body) {
+        return new NewsFeed(mentorId, body, ContentOpenStatus.DRAFT);
     }
 
     public Boolean isDeleted() {

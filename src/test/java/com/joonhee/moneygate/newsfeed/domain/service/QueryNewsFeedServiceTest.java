@@ -56,7 +56,7 @@ class QueryNewsFeedServiceTest {
         String profileImage = "https://joonhee.com";
         User mentor = User.createMentor(nickName, email, profileImage);
         mentorRepository.save(mentor);
-        NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentOpenStatus.PUBLIC);
+        NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(mentor.getId(), "오늘은 무엇을 할까요?");
 
         return newsFeedRepository.save(newsFeed);
     }
