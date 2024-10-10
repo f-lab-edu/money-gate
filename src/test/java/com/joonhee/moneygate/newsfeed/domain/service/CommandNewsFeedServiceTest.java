@@ -2,30 +2,36 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.exception.InvalidUserPermission;
 import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
+import com.joonhee.moneygate.validator.MentorValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CommandNewsFeedServiceTest {
     private CommandNewsFeedService commandNewsFeedUseCase;
     private MentorRepository mentorRepository;
     private NewsFeedRepository newsFeedRepository;
+    private MentorValidator mentorValidator;
 
     @BeforeEach
     void setUp() {
         this.mentorRepository = new MemoryMentorRepository();
         this.newsFeedRepository = new MemoryNewsFeedRepository();
+        this.mentorValidator = new MentorValidator(mentorRepository);
 
         this.commandNewsFeedUseCase = new CommandNewsFeedService(
             this.mentorRepository,
-            this.newsFeedRepository
+            this.newsFeedRepository,
+            this.mentorValidator
         );
     }
 
@@ -76,6 +82,16 @@ class CommandNewsFeedServiceTest {
         assertThat(deletedNewsFeed.isDeleted()).isTrue();
     }
 
+    @Test
+    @DisplayName("권한없는 멘토가 뉴스피드 생성시 예외처리")
+    void unauthorizedUserCreateNewsFeedException() {
+        // Arrange
+        User user = createDummyUserEntity();
+        // Action, Assert
+        assertThatThrownBy(() -> this.commandNewsFeedUseCase.createNewsFeedByPublic(user.getId(), null))
+            .isInstanceOf(InvalidUserPermission.class);
+    }
+
     private NewsFeed createDummyPublicNewsFeed() {
         User mentor = mentorRepository.save(createDummyMentorEntity());
         return this.commandNewsFeedUseCase.createNewsFeedByPublic(mentor.getId(), null);
@@ -94,6 +110,15 @@ class CommandNewsFeedServiceTest {
         String profileImage = "https://avatars.githubusercontent.com/u/77449822?v=4";
         return mentorRepository.save(
             User.createMentor(nickName, email, profileImage)
+        );
+    }
+
+    private User createDummyUserEntity(){
+        String nickName = "joonheeUser";
+        String email = "joonheeUser@abc.com";
+        String profileImage = "https://avatars.githubusercontent.com/u/77449822?v=4";
+        return mentorRepository.save(
+            User.createUser(nickName, email, profileImage)
         );
     }
 }

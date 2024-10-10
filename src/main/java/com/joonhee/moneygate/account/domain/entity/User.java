@@ -33,7 +33,13 @@ public class User {
 
     public static User createMentor(String nickName, String email, String profileImage) {
         User user = new User(nickName, email, profileImage);
-        user.setRoles(Arrays.asList(Role.NEWS_FEED_WRITER));
+        user.setRoles(Arrays.asList(Role.USER, Role.NEWS_FEED_WRITER));
+        return user;
+    }
+
+    public static User createUser(String nickName, String email, String profileImage) {
+        User user = new User(nickName, email, profileImage);
+        user.setRoles(Arrays.asList(Role.USER));
         return user;
     }
 
