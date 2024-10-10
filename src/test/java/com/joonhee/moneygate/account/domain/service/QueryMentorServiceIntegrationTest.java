@@ -1,6 +1,9 @@
 package com.joonhee.moneygate.account.domain.service;
 
+import account.domain.repository.MentorRepositoryHelper;
 import com.joonhee.moneygate.account.domain.entity.User;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +16,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class QueryMentorServiceIntegrationTest {
     @Autowired
-    private CreateMentorService createMentorService;
-    @Autowired
     private QueryMentorService queryMentorService;
+    @Autowired
+    private UserRepository mentorRepository;
+    private MentorRepositoryHelper mentorRepositoryHelper;
+
+    @BeforeEach
+    void setUp() {
+        this.mentorRepositoryHelper = new MentorRepositoryHelper(
+            mentorRepository
+        );
+    }
 
     @Test
     @DisplayName("멘토 조회")
     void findById() {
         // Arrange
-        String nickName = "joonheeTest";
-        String email = "jonnheeTest@abc.com";
-        String profileImage = "https://joonhee.com";
-        User mentor = createMentorService.createMentor(nickName, email, profileImage);
+        User mentor = mentorRepositoryHelper.createDummyMentor();
         Long id = mentor.getId();
 
         // Action

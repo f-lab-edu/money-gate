@@ -2,15 +2,15 @@ package com.joonhee.moneygate.validator;
 
 import com.joonhee.moneygate.account.domain.entity.Role;
 import com.joonhee.moneygate.account.domain.entity.User;
-import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.exception.InvalidUserPermission;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MentorValidator {
-    private final MentorRepository userRepository;
+    private final UserRepository userRepository;
 
-    public MentorValidator(MentorRepository userRepository) {
+    public MentorValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

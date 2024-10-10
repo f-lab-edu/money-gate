@@ -1,9 +1,8 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.entity.User;
-import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
-import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class QueryNewsFeedServiceTest {
     private QueryNewsFeedService queryNewsFeedService;
     private NewsFeedRepository newsFeedRepository;
-    private MentorRepository mentorRepository;
+    private UserRepository mentorRepository;
 
     @BeforeEach
     void setUp() {

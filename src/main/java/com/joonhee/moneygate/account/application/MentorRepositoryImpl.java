@@ -1,12 +1,12 @@
 package com.joonhee.moneygate.account.application;
 
 import com.joonhee.moneygate.account.domain.entity.User;
-import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.exception.NotFoundMentorException;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MentorRepositoryImpl implements MentorRepository {
+public class MentorRepositoryImpl implements UserRepository {
 
     private final CrudMentorRepository crudMentorRepository;
 

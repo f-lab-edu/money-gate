@@ -1,21 +1,20 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
-import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 public class QueryNewsFeedService {
     private final NewsFeedRepository newsFeedRepository;
-    private final MentorRepository mentorRepository;
+    private final UserRepository mentorRepository;
 
-    public QueryNewsFeedService(NewsFeedRepository newsFeedRepository, MentorRepository mentorRepository) {
+    public QueryNewsFeedService(NewsFeedRepository newsFeedRepository, UserRepository mentorRepository) {
         this.newsFeedRepository = newsFeedRepository;
         this.mentorRepository = mentorRepository;
     }

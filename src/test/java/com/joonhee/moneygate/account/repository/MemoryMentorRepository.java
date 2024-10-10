@@ -1,12 +1,12 @@
 package com.joonhee.moneygate.account.repository;
 
 import com.joonhee.moneygate.account.domain.entity.User;
-import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.exception.NotFoundMentorException;
 
 import java.util.HashMap;
 
-public class MemoryMentorRepository implements MentorRepository {
+public class MemoryMentorRepository implements UserRepository {
     private final HashMap<Long, User> mentors = new HashMap<>();
 
     @Override

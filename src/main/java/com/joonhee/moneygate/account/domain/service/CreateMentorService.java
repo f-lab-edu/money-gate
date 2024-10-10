@@ -1,14 +1,14 @@
 package com.joonhee.moneygate.account.domain.service;
 
 import com.joonhee.moneygate.account.domain.entity.User;
-import com.joonhee.moneygate.account.domain.repository.MentorRepository;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreateMentorService {
-    private final MentorRepository mentorRepository;
+    private final UserRepository mentorRepository;
 
-    public CreateMentorService(MentorRepository mentorRepository) {
+    public CreateMentorService(UserRepository mentorRepository) {
         this.mentorRepository = mentorRepository;
     }
 
