@@ -4,10 +4,10 @@ public enum ContentOpenStatus {
     PUBLIC("공개"),
     DELETED("삭제"),
     DRAFT("작성중");
-    private String label;
+    private String description;
 
-    ContentOpenStatus(String label) {
-        this.label = label;
+    ContentOpenStatus(String description) {
+        this.description = description;
     }
 
 }
