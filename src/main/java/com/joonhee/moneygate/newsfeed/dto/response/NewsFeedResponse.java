@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record NewsFeedResponse(
-    UUID key,
+    String key,
     String mentorEmail,
     String body,
     LocalDateTime createdAt

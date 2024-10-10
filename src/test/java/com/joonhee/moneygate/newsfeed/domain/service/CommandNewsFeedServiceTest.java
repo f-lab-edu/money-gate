@@ -3,7 +3,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
-import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
@@ -48,7 +48,7 @@ class CommandNewsFeedServiceTest {
         // Assert
         assertThat(createdDraftNewsFeed.getId()).isEqualTo(createdDraftNewsFeed.getId());
         assertThat(createdDraftNewsFeed.getBody()).isEqualTo(createdDraftNewsFeed.getBody());
-        assertThat(createdDraftNewsFeed.getStatus()).isEqualTo(ContentStatus.DRAFT);
+        assertThat(createdDraftNewsFeed.getStatus()).isEqualTo(ContentOpenStatus.DRAFT);
     }
 
     @Test

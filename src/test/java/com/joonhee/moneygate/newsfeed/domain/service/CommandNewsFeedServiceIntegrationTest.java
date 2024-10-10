@@ -2,7 +2,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.service.CreateMentorService;
-import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ public class CommandNewsFeedServiceIntegrationTest {
         // Assert
         NewsFeed createdDraftNewsFeed = queryNewsFeedService.getNewsFeed(draftNewsFeed.getKey());
         assertThat(createdDraftNewsFeed.getId()).isEqualTo(draftNewsFeed.getId());
-        assertThat(createdDraftNewsFeed.getStatus()).isEqualTo(ContentStatus.DRAFT);
+        assertThat(createdDraftNewsFeed.getStatus()).isEqualTo(ContentOpenStatus.DRAFT);
     }
 
     @Test

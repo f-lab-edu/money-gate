@@ -1,16 +1,15 @@
 package com.joonhee.moneygate.newsfeed.repository;
 
-import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class MemoryNewsFeedRepository implements NewsFeedRepository {
-    private final HashMap<UUID, NewsFeed> newsFeeds = new HashMap<>();
+    private final HashMap<String, NewsFeed> newsFeeds = new HashMap<>();
 
     @Override
     public NewsFeed save(NewsFeed newsFeed) {
@@ -19,7 +18,7 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
     }
 
     @Override
-    public NewsFeed findByKey(UUID newsFeedKey) {
+    public NewsFeed findByKey(String newsFeedKey) {
         NewsFeed newsFeed = newsFeeds.get(newsFeedKey);
         if (newsFeed == null) {
             throw new NotFoundNewsFeedException(newsFeedKey.toString());
@@ -31,7 +30,7 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
     public List<NewsFeed> findAllPublic() {
 
         return newsFeeds.values().stream()
-            .filter(newsFeed -> newsFeed.getStatus().equals(ContentStatus.PUBLIC))
+            .filter(newsFeed -> newsFeed.getStatus().equals(ContentOpenStatus.PUBLIC))
             .toList();
     }
 

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface CrudNewsFeedRepository extends CrudRepository<NewsFeed, Long> {
-    Optional<NewsFeed> findByKey(UUID key);
+    Optional<NewsFeed> findByKey(String key);
     List<NewsFeed> findAllByStatusOrderByCreatedAtDesc(String status);
     List<NewsFeed> findAll(Sort sort);
 

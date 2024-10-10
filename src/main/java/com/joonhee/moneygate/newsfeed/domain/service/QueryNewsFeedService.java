@@ -33,7 +33,7 @@ public class QueryNewsFeedService {
             .collect(Collectors.toList());
     }
 
-    public NewsFeed getNewsFeed(UUID key) {
+    public NewsFeed getNewsFeed(String key) {
         return newsFeedRepository.findByKey(key);
     }
 }

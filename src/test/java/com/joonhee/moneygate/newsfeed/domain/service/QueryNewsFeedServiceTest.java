@@ -3,7 +3,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.MentorRepository;
 import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
-import com.joonhee.moneygate.newsfeed.domain.entity.ContentStatus;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
@@ -56,7 +56,7 @@ class QueryNewsFeedServiceTest {
         String profileImage = "https://joonhee.com";
         User mentor = User.createMentor(nickName, email, profileImage);
         mentorRepository.save(mentor);
-        NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentStatus.PUBLIC);
+        NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentOpenStatus.PUBLIC);
 
         return newsFeedRepository.save(newsFeed);
     }

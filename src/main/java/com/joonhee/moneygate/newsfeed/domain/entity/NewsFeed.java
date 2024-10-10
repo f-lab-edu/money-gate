@@ -1,5 +1,9 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.databind.EnumNamingStrategies;
+import com.fasterxml.jackson.databind.EnumNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.EnumNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -15,11 +19,11 @@ public class NewsFeed {
     @Column("news_feed_id")
     private Long id;
     @Column("news_feed_key")
-    private UUID key;
+    private String key;
     @Column("user_id")
     private Long mentorId;
     private String body;
-    private ContentStatus status;
+    private ContentOpenStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -27,9 +31,9 @@ public class NewsFeed {
     public NewsFeed(
         Long mentorId,
         String body,
-        ContentStatus status
+        ContentOpenStatus status
     ) {
-        this.key = UUID.randomUUID();
+        this.key = UUID.randomUUID().toString();
         this.mentorId = mentorId;
         this.body = body;
         this.status = status;
@@ -37,7 +41,7 @@ public class NewsFeed {
     }
 
     public Boolean isDeleted() {
-        return this.status == ContentStatus.DELETED;
+        return this.status == ContentOpenStatus.DELETED;
     }
 
 
@@ -49,7 +53,7 @@ public class NewsFeed {
 
     public NewsFeed delete() {
         this.deletedAt = LocalDateTime.now();
-        this.status = ContentStatus.DELETED;
+        this.status = ContentOpenStatus.DELETED;
         return this;
     }
 }

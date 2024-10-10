@@ -17,7 +17,7 @@ class NewsFeedTest {
         String profileImage = "https://avatars.githubusercontent.com/u/77449822?v=4";
         User mentor = User.createMentor(nickName, email, profileImage);
         // Action
-        NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentStatus.PUBLIC);
+        NewsFeed newsFeed = new NewsFeed(mentor.getId(), "오늘은 무엇을 할까요?", ContentOpenStatus.PUBLIC);
         // Assert
         assertThat(newsFeed).isNotNull();
     }
