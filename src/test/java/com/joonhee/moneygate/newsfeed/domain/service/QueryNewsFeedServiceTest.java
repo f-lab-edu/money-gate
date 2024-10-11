@@ -33,7 +33,7 @@ class QueryNewsFeedServiceTest {
         // Arrange
         createDummyNewsFeed();
         // Action
-        List<NewsFeedDetail> newsFeeds = queryNewsFeedService.findAllPublic();
+        List<NewsFeedDetail> newsFeeds = queryNewsFeedService.findAllPublicSlice(10, null).content();
         // Assert
         assertThat(newsFeeds.size()).isEqualTo(1);
     }

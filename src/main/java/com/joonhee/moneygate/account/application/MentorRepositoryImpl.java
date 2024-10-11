@@ -5,6 +5,8 @@ import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.exception.NotFoundMentorException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MentorRepositoryImpl implements UserRepository {
 
@@ -22,5 +24,10 @@ public class MentorRepositoryImpl implements UserRepository {
     @Override
     public User findById(Long id) throws IllegalArgumentException {
         return crudMentorRepository.findById(id).orElseThrow(() -> new NotFoundMentorException(id));
+    }
+
+    @Override
+    public List<User> findByIds(List<Long> ids) {
+        return crudMentorRepository.findByIds(ids);
     }
 }

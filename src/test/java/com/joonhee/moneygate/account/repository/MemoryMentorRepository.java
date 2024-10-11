@@ -5,6 +5,7 @@ import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.exception.NotFoundMentorException;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class MemoryMentorRepository implements UserRepository {
     private final HashMap<Long, User> mentors = new HashMap<>();
@@ -22,5 +23,12 @@ public class MemoryMentorRepository implements UserRepository {
             throw new NotFoundMentorException(id);
         }
         return mentor;
+    }
+
+    @Override
+    public List<User> findByIds(List<Long> ids) {
+        return mentors.values().stream()
+                .filter(mentor -> ids.contains(mentor.getId()))
+                .toList();
     }
 }

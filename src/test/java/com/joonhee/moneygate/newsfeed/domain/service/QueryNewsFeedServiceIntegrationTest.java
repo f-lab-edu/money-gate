@@ -1,6 +1,7 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
+import com.joonhee.moneygate.common.SliceContent;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
 import newsfeed.domain.repository.NewsFeedRepositoryHelper;
@@ -11,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,8 +42,8 @@ public class QueryNewsFeedServiceIntegrationTest {
         // Arrange
         newsFeedRepositoryHelper.createDummyPublicNewsFeeds();
         // Action
-        List<NewsFeedDetail> afterNewsFeeds = queryNewsFeedService.findAll();
+        SliceContent<NewsFeedDetail> newsFeeds = queryNewsFeedService.findAllPublicSlice(10, null);
         // Assert
-        assertThat(afterNewsFeeds.size()).isGreaterThan(0);
+        assertThat(newsFeeds.content().size()).isGreaterThan(0);
     }
 }

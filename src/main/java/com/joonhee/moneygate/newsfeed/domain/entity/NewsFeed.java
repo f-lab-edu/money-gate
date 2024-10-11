@@ -1,5 +1,7 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class NewsFeed {
     @Id
