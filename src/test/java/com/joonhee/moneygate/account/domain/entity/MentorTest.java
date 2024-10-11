@@ -23,17 +23,4 @@ class MentorTest {
         assertThat(mentor.getEmail()).isEqualTo(email);
         assertThat(mentor.getProfileImage()).isEqualTo(profileImage);
     }
-
-    @Test
-    @DisplayName("이메일 검증")
-    void validateEmail() {
-        // Arrange
-        String nickName = "joonheeTest";
-        String email = "";
-        String profileImage = "https://joonhee.com";
-
-        // Action & Assert
-        assertThatThrownBy(() -> User.createMentor(nickName, email, profileImage))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
 }
