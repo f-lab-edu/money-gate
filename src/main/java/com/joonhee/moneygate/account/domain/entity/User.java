@@ -1,9 +1,7 @@
 package com.joonhee.moneygate.account.domain.entity;
 
-import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.aspectj.lang.annotation.After;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
