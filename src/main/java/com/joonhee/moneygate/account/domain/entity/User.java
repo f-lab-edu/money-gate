@@ -1,14 +1,15 @@
 package com.joonhee.moneygate.account.domain.entity;
 
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.aspectj.lang.annotation.After;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -19,7 +20,10 @@ public class User {
     private String email;
     private String nickName;
     private String profileImage;
-    private String roles;
+    @Column("roles")
+    private String rolesString;
+    @Transient
+    private Roles roles;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -33,18 +37,23 @@ public class User {
 
     public static User createMentor(String nickName, String email, String profileImage) {
         User user = new User(nickName, email, profileImage);
-        user.setRoles(Arrays.asList(Role.USER, Role.NEWS_FEED_WRITER));
+        user.roles = new Roles(Arrays.asList(Role.USER, Role.NEWS_FEED_WRITER));
+        user.rolesString = user.roles.listAsString();
         return user;
     }
 
     public static User createUser(String nickName, String email, String profileImage) {
         User user = new User(nickName, email, profileImage);
-        user.setRoles(Arrays.asList(Role.USER));
+        user.roles = new Roles(Arrays.asList(Role.USER));
+        user.rolesString = user.roles.listAsString();
         return user;
     }
 
     public boolean isMentor() {
-        return getRoles().contains(Role.NEWS_FEED_WRITER);
+        if(roles == null) {
+            roles = Roles.fromString(rolesString);
+        }
+        return roles.contains(Role.NEWS_FEED_WRITER);
     }
 
     void validateEmail(String email) {
@@ -57,17 +66,5 @@ public class User {
         if (!email.matches(EMAIL_REGEX)) {
             throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
         }
-    }
-
-    public List<Role> getRoles() {
-        return Arrays.stream(roles.split(","))
-            .map(Role::valueOf)
-            .collect(Collectors.toList());
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles.stream()
-            .map(Role::name)
-            .collect(Collectors.joining(","));
     }
 }
