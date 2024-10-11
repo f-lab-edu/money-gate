@@ -26,7 +26,6 @@ public class User {
     private LocalDateTime updatedAt;
 
     private User(String nickName, String email, String profileImage) {
-        validateEmail(email);
         this.email = email;
         this.nickName = nickName;
         this.profileImage = profileImage;
@@ -52,17 +51,5 @@ public class User {
             roles = Roles.fromString(rolesString);
         }
         return roles.contains(Role.NEWS_FEED_WRITER);
-    }
-
-    void validateEmail(String email) {
-        String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-
-        if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("이메일이 비어있습니다.");
-        }
-
-        if (!email.matches(EMAIL_REGEX)) {
-            throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
-        }
     }
 }
