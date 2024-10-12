@@ -18,9 +18,6 @@ public class User {
     private String email;
     private String nickName;
     private String profileImage;
-    @Column("roles")
-    private String rolesString;
-    @Transient
     private Roles roles;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -35,21 +32,16 @@ public class User {
     public static User createMentor(String nickName, String email, String profileImage) {
         User user = new User(nickName, email, profileImage);
         user.roles = new Roles(Arrays.asList(Role.USER, Role.NEWS_FEED_WRITER));
-        user.rolesString = user.roles.listAsString();
         return user;
     }
 
     public static User createUser(String nickName, String email, String profileImage) {
         User user = new User(nickName, email, profileImage);
         user.roles = new Roles(Arrays.asList(Role.USER));
-        user.rolesString = user.roles.listAsString();
         return user;
     }
 
     public boolean isMentor() {
-        if(roles == null) {
-            roles = Roles.fromString(rolesString);
-        }
         return roles.contains(Role.NEWS_FEED_WRITER);
     }
 }

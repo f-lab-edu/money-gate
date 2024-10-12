@@ -1,9 +1,11 @@
 package com.joonhee.moneygate.account.domain.entity;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.joonhee.moneygate.account.domain.dto.RolesDto;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
+@Slf4j
 public class Roles {
     private List<Role> roles;
 
@@ -15,16 +17,7 @@ public class Roles {
         return roles.contains(role);
     }
 
-    public String listAsString() {
-        return roles.stream()
-            .map(Role::name)
-            .collect(Collectors.joining(","));
-    }
-
-    public static Roles fromString(String rolesString) {
-        List<Role> roles = Arrays.stream(rolesString.split(","))
-            .map(Role::valueOf)
-            .collect(Collectors.toList());
-        return new Roles(roles);
+    public RolesDto toDto() {
+        return new RolesDto(roles);
     }
 }
