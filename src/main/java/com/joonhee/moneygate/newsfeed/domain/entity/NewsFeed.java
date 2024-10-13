@@ -1,54 +1,67 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NewsFeed {
-    private final Long id = 1L;     // AUTO_INCREMENT
-    private final UUID key;
-    private final Mentor mentor;
+    @Id
+    @Column("news_feed_id")
+    private Long id;
+    @Column("news_feed_key")
+    private String key;
+    @Column("user_id")
+    private Long mentorId;
     private String body;
-    private ContentStatus status;
-    private ZonedDateTime deletedAt;
+    private ContentOpenStatus status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
-    public NewsFeed(
-        Mentor mentor,
+    private NewsFeed(
+        Long mentorId,
         String body,
-        ContentStatus status
+        ContentOpenStatus status
     ) {
-        this.key = UUID.randomUUID();
-        this.mentor = mentor;
+        this.key = UUID.randomUUID().toString();
+        this.mentorId = mentorId;
         this.body = body;
         this.status = status;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public UUID getKey() {
-        return key;
+    public static NewsFeed createNewsFeedByPublic(Long mentorId, String body) {
+        return new NewsFeed(mentorId, body, ContentOpenStatus.PUBLIC);
     }
 
-    public Long getMentorId() {
-        return mentor.getId();
-    }
-
-    public String getBody() {
-        return body;
+    public static NewsFeed createNewsFeedByDraft(Long mentorId, String body) {
+        return new NewsFeed(mentorId, body, ContentOpenStatus.DRAFT);
     }
 
     public Boolean isDeleted() {
-        return this.status == ContentStatus.DELETED;
+        return this.status == ContentOpenStatus.DELETED;
     }
 
 
     public NewsFeed updateBody(String body) {
         this.body = body;
+        this.updatedAt = LocalDateTime.now();
         return this;
     }
 
     public NewsFeed delete() {
-        this.deletedAt = ZonedDateTime.now();
-        this.status = ContentStatus.DELETED;
+        this.deletedAt = LocalDateTime.now();
+        this.status = ContentOpenStatus.DELETED;
         return this;
     }
 }

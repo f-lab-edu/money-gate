@@ -1,56 +1,92 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
-import com.joonhee.moneygate.mentor.domain.entity.Mentor;
-import com.joonhee.moneygate.mentor.domain.repository.MentorRepository;
-import com.joonhee.moneygate.mentor.repository.MemoryMentorRepository;
+import account.domain.repository.MentorRepositoryHelper;
+import account.domain.repository.UserRepositoryHelper;
+import com.joonhee.moneygate.account.domain.entity.User;
+import com.joonhee.moneygate.account.domain.repository.UserRepository;
+import com.joonhee.moneygate.account.exception.InvalidUserPermission;
+import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
+import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
+import com.joonhee.moneygate.validator.MentorValidator;
+import newsfeed.domain.repository.NewsFeedRepositoryHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CommandNewsFeedServiceTest {
-    CommandNewsFeedService commandNewsFeedUseCase;
-    MentorRepository mentorRepository;
-    NewsFeedRepository newsFeedRepository;
+    private CommandNewsFeedService commandNewsFeedService;
+    private UserRepository mentorRepository;
+    private NewsFeedRepository newsFeedRepository;
+    private MentorValidator mentorValidator;
+    private NewsFeedRepositoryHelper newsFeedRepositoryHelper;
+    private MentorRepositoryHelper mentorRepositoryHelper;
+    private UserRepositoryHelper userRepositoryHelper;
 
     @BeforeEach
     void setUp() {
         this.mentorRepository = new MemoryMentorRepository();
         this.newsFeedRepository = new MemoryNewsFeedRepository();
+        this.mentorValidator = new MentorValidator(mentorRepository);
 
-        this.commandNewsFeedUseCase = new CommandNewsFeedService(
+        this.commandNewsFeedService = new CommandNewsFeedService(
             this.mentorRepository,
-            this.newsFeedRepository
+            this.newsFeedRepository,
+            this.mentorValidator
+        );
+
+        this.newsFeedRepositoryHelper = new NewsFeedRepositoryHelper(
+            newsFeedRepository,
+            mentorRepository
+        );
+
+        this.mentorRepositoryHelper = new MentorRepositoryHelper(
+            mentorRepository
+        );
+
+        this.userRepositoryHelper = new UserRepositoryHelper(
+            mentorRepository
         );
     }
 
     @Test
-    @DisplayName("뉴스피드 생성하기")
+    @DisplayName("뉴스피드 생성하기(Public)")
     void create() {
         // Arrange, Action
-        NewsFeed createdNewsFeed = createDummyNewsFeed();
+        NewsFeed createdNewsFeed = newsFeedRepositoryHelper.createDummyPublicNewsFeed();
 
         // Assert
-        assertThat(createdNewsFeed.getMentorId()).isEqualTo(createdNewsFeed.getMentorId());
+        assertThat(createdNewsFeed.getId()).isEqualTo(createdNewsFeed.getId());
         assertThat(createdNewsFeed.getBody()).isEqualTo(createdNewsFeed.getBody());
+    }
 
+    @Test
+    @DisplayName("뉴스피드 생성하기(Draft)")
+    void test() {
+        // Arrange, Action
+        NewsFeed createdDraftNewsFeed = newsFeedRepositoryHelper.createDummyDraftNewsFeed();
+        // Assert
+        assertThat(createdDraftNewsFeed.getId()).isEqualTo(createdDraftNewsFeed.getId());
+        assertThat(createdDraftNewsFeed.getBody()).isEqualTo(createdDraftNewsFeed.getBody());
+        assertThat(createdDraftNewsFeed.getStatus()).isEqualTo(ContentOpenStatus.DRAFT);
     }
 
     @Test
     @DisplayName("뉴스피드 수정하기")
     void update() {
         // Arrange
-        NewsFeed createdNewsFeed = createDummyNewsFeed();
+        NewsFeed createdNewsFeed = newsFeedRepositoryHelper.createDummyPublicNewsFeed();
         String changedBody = "내용을 변경합니다";
 
         // Action
-        this.commandNewsFeedUseCase.updateNewsFeed(createdNewsFeed.getKey(), changedBody);
+        this.commandNewsFeedService.updateNewsFeed(createdNewsFeed.getKey(), changedBody);
         // Assert
-        NewsFeed updatedNewsFeed = newsFeedRepository.findById(createdNewsFeed.getKey());
+        NewsFeed updatedNewsFeed = newsFeedRepository.findByKey(createdNewsFeed.getKey());
         assertThat(updatedNewsFeed.getBody()).isEqualTo(changedBody);
     }
 
@@ -58,21 +94,20 @@ class CommandNewsFeedServiceTest {
     @DisplayName("뉴스피드 삭제하기")
     void delete() {
         // Arrange
-        NewsFeed createdNewsFeed = createDummyNewsFeed();
+        NewsFeed createdNewsFeed = newsFeedRepositoryHelper.createDummyPublicNewsFeed();
         // Action
-        NewsFeed deletedNewsFeed = this.commandNewsFeedUseCase.deleteNewsFeed(createdNewsFeed.getKey());
+        NewsFeed deletedNewsFeed = this.commandNewsFeedService.deleteNewsFeed(createdNewsFeed.getKey());
         // Assert
         assertThat(deletedNewsFeed.isDeleted()).isTrue();
     }
 
-    private NewsFeed createDummyNewsFeed() {
-        Mentor mentor = mentorRepository.save(
-            new Mentor(
-                "이준희",
-                "joobhee@google.com",
-                "https://avatars.githubusercontent.com/u/77449822?v=4")
-        );
-        return this.commandNewsFeedUseCase.createNewsFeed(mentor.getId(), null);
+    @Test
+    @DisplayName("권한없는 멘토가 뉴스피드 생성시 예외처리")
+    void unauthorizedUserCreateNewsFeedException() {
+        // Arrange
+        User user = userRepositoryHelper.createDummyUser();
+        // Action, Assert
+        assertThatThrownBy(() -> this.commandNewsFeedService.createNewsFeedByPublic(user.getId(), null))
+            .isInstanceOf(InvalidUserPermission.class);
     }
-
 }
