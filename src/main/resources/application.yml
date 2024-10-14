@@ -1,3 +1,12 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 100
+      min-spare: 10
+    accept-count: 50
+    max-connections: 150
+
 investing:
   com:
     src: "https://sbcharts.investing.com/events_charts/us"
@@ -12,6 +21,13 @@ spring:
     username: joonhee
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 50 # pool-locking이 발생하지 않을 수 있는 수 권장
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
   cloud:
     openfeign:
       client:
@@ -19,3 +35,27 @@ spring:
           default:
             connectTimeout: 2000
             readTimeout: 1000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local, dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
