@@ -1,6 +1,5 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class NewsFeed {
     @Id
@@ -24,28 +23,54 @@ public class NewsFeed {
     private Long mentorId;
     private String body;
     private ContentOpenStatus status;
+    private Likes likes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
+    @Builder
     private NewsFeed(
+        Long id,
+        String key,
         Long mentorId,
         String body,
-        ContentOpenStatus status
+        ContentOpenStatus status,
+        Likes likes,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt,
+        LocalDateTime deletedAt
     ) {
-        this.key = UUID.randomUUID().toString();
+        this.id = id;
+        this.key = key;
         this.mentorId = mentorId;
         this.body = body;
         this.status = status;
-        this.createdAt = LocalDateTime.now();
+        this.likes = likes;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public static NewsFeed createNewsFeedByPublic(Long mentorId, String body) {
-        return new NewsFeed(mentorId, body, ContentOpenStatus.PUBLIC);
+        return NewsFeed.builder()
+            .key(UUID.randomUUID().toString())
+            .mentorId(mentorId)
+            .body(body)
+            .likes(new Likes())
+            .status(ContentOpenStatus.PUBLIC)
+            .createdAt(LocalDateTime.now())
+            .build();
     }
 
     public static NewsFeed createNewsFeedByDraft(Long mentorId, String body) {
-        return new NewsFeed(mentorId, body, ContentOpenStatus.DRAFT);
+        return NewsFeed.builder()
+            .key(UUID.randomUUID().toString())
+            .mentorId(mentorId)
+            .body(body)
+            .likes(new Likes())
+            .status(ContentOpenStatus.DRAFT)
+            .createdAt(LocalDateTime.now())
+            .build();
     }
 
     public Boolean isDeleted() {
@@ -63,5 +88,9 @@ public class NewsFeed {
         this.deletedAt = LocalDateTime.now();
         this.status = ContentOpenStatus.DELETED;
         return this;
+    }
+
+    public List<Long> addOrSubtractLike(Like like) {
+        return this.likes.addOrSubtract(like);
     }
 }

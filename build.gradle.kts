@@ -14,6 +14,12 @@ java {
     }
 }
 
+// https://docs.spring.io/spring-data/jdbc/docs/2.4.18/reference/html/#jdbc.query-methods.at-query
+// Java 8 이상에서는 컴파일 시에 파라미터 이름을 유지하도록 설정 (@Param 어노테이션 사용하지 않아도 됨)
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-parameters")
+}
+
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.1")
