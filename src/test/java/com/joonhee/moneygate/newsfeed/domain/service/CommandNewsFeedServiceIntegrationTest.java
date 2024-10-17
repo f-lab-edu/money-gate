@@ -1,5 +1,6 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
+import account.domain.entity.UserStub;
 import account.domain.repository.MentorRepositoryHelper;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
@@ -50,6 +51,8 @@ public class CommandNewsFeedServiceIntegrationTest {
     @DisplayName("멘토가 뉴스피드(Draft) 생성")
     void test() {
         // Arrange,
+        User mentor2 = UserStub.createDummyUser();
+        mentorRepository.save(mentor2);
         User mentor = mentorRepositoryHelper.createDummyMentor();
         // Action
         NewsFeed draftNewsFeed = commandNewsFeedService.createNewsFeedByDraft(mentor.getId(), "뉴스피드 내용");

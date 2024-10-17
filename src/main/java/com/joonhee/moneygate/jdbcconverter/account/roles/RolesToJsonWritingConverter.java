@@ -1,4 +1,4 @@
-package com.joonhee.moneygate.jdbcconverter.account;
+package com.joonhee.moneygate.jdbcconverter.account.roles;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
