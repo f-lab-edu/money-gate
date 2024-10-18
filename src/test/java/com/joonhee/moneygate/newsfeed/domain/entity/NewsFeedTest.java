@@ -1,8 +1,8 @@
 package com.joonhee.moneygate.newsfeed.domain.entity;
 
-import account.domain.entity.UserStub;
+import account.domain.entity.UserBuilder;
 import com.joonhee.moneygate.account.domain.entity.User;
-import newsfeed.domain.entity.LikeStub;
+import newsfeed.domain.entity.LikeBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ class NewsFeedTest {
     @DisplayName("뉴스피드에 작성하기")
     void create() {
         // Arrange
-        User mentor = UserStub.createDummyMentor();
+        User mentor = UserBuilder.createDummyMentor();
         // Action
         NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(mentor.getId(), "오늘은 무엇을 할까요?");
         // Assert
@@ -27,7 +27,7 @@ class NewsFeedTest {
         // Arrange
         Long mentorId = 1L;
         NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(mentorId, "오늘은 무엇을 할까요?");
-        Like like = LikeStub.createWillBeDeletedDummyLike();
+        Like like = LikeBuilder.createWillBeDeletedDummyLike();
         // Action
         Like didLike = newsFeed.doOrUndoLike(like);
 
@@ -41,7 +41,7 @@ class NewsFeedTest {
         // Arrange
         Long mentorId = 1L;
         NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(mentorId, "오늘은 무엇을 할까요?");
-        Like like = LikeStub.createWillBeDeletedDummyLike();
+        Like like = LikeBuilder.createWillBeDeletedDummyLike();
         newsFeed.doOrUndoLike(like);
         // Action
         Like revokeLike = newsFeed.doOrUndoLike(like);

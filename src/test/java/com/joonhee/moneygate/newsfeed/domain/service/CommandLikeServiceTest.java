@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
-import account.domain.entity.UserStub;
+import account.domain.entity.UserBuilder;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.repository.MemoryUserRepository;
@@ -11,7 +11,7 @@ import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryLikeRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
-import newsfeed.domain.entity.NewsFeedStub;
+import newsfeed.domain.entity.NewsFeedBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,13 +40,13 @@ class CommandLikeServiceTest {
     @DisplayName("일반유저가 뉴스피드에 좋아요 누르기")
     void addLike() {
         // Arrange
-        User mentor = UserStub.createDummyMentor();
+        User mentor = UserBuilder.createDummyMentor();
         mentor = userRepository.save(mentor);
 
-        User userIdWhoClickLike = UserStub.createDummyUser();
+        User userIdWhoClickLike = UserBuilder.createDummyUser();
         userIdWhoClickLike = userRepository.save(userIdWhoClickLike);
 
-        NewsFeed createdNewsFeed = NewsFeedStub.createDummyPublicNewsFeed(mentor.getId());
+        NewsFeed createdNewsFeed = NewsFeedBuilder.createDummyPublicNewsFeed(mentor.getId());
         createdNewsFeed = newsFeedRepository.save(createdNewsFeed);
 
         // Action
@@ -60,13 +60,13 @@ class CommandLikeServiceTest {
     @DisplayName("일반유저가 뉴스피드에 좋아요 취소하기")
     void subtractLike() {
         // Arrange
-        User mentor = UserStub.createDummyMentor();
+        User mentor = UserBuilder.createDummyMentor();
         mentor = userRepository.save(mentor);
 
-        NewsFeed createdNewsFeed = NewsFeedStub.createDummyPublicNewsFeed(mentor.getId());
+        NewsFeed createdNewsFeed = NewsFeedBuilder.createDummyPublicNewsFeed(mentor.getId());
         createdNewsFeed = newsFeedRepository.save(createdNewsFeed);
 
-        User userIdWhoClickLike = UserStub.createDummyUser();
+        User userIdWhoClickLike = UserBuilder.createDummyUser();
         userIdWhoClickLike = userRepository.save(userIdWhoClickLike);
 
         Like didLike = this.commandLikeService.addOrSubtract(userIdWhoClickLike.getId(), createdNewsFeed.getKey());

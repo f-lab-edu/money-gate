@@ -2,7 +2,7 @@ package newsfeed.domain.entity;
 
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 
-public class NewsFeedStub {
+public class NewsFeedBuilder {
     public static NewsFeed createDummyPublicNewsFeed(Long mentorId) {
         NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(
             mentorId,

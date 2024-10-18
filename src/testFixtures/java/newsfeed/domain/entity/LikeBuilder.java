@@ -3,7 +3,7 @@ package newsfeed.domain.entity;
 import com.joonhee.moneygate.newsfeed.domain.entity.Like;
 import com.joonhee.moneygate.newsfeed.domain.entity.LikeStatus;
 
-public class LikeStub {
+public class LikeBuilder {
     public static Like createWillBeDeletedDummyLike() {
         Like like = Like.createLike(
             1L,

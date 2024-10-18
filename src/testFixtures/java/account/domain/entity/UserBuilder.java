@@ -2,7 +2,7 @@ package account.domain.entity;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 
-public class UserStub {
+public class UserBuilder {
     public static User createDummyUser() {
         User user = User.createUser(
             "joonheeuser",

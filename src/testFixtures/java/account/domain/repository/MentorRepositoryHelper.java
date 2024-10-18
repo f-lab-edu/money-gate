@@ -1,6 +1,6 @@
 package account.domain.repository;
 
-import account.domain.entity.UserStub;
+import account.domain.entity.UserBuilder;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
 
@@ -12,6 +12,6 @@ public class MentorRepositoryHelper {
     }
 
     public User createDummyMentor() {
-        return mentorRepository.save(UserStub.createDummyMentor());
+        return mentorRepository.save(UserBuilder.createDummyMentor());
     }
 }
