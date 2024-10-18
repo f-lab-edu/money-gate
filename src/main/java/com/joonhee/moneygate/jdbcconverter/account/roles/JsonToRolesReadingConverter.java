@@ -1,9 +1,10 @@
-package com.joonhee.moneygate.jdbcconverter.account;
+package com.joonhee.moneygate.jdbcconverter.account.roles;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joonhee.moneygate.account.domain.dto.RolesDto;
 import com.joonhee.moneygate.account.domain.entity.Roles;
+import com.joonhee.moneygate.common.ObjectMapperFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
@@ -11,7 +12,7 @@ import org.springframework.data.convert.ReadingConverter;
 @Slf4j
 @ReadingConverter
 public class JsonToRolesReadingConverter implements Converter<String, Roles> {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = ObjectMapperFactory.INSTANCE.getObjectMapper();
     @Override
     public Roles convert(String source) {
         try {
