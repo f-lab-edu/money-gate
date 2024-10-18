@@ -22,20 +22,20 @@ public class CommandLikeService {
         this.likeRepository = likeRepository;
     }
 
-    public NewsFeed addOrSubtract(Long userId, String newsFeedKey) {
+    public Like addOrSubtract(Long userId, String newsFeedKey) {
         NewsFeed newsFeed = newsFeedRepository.findByKey(newsFeedKey);
-        Like like = doOrUndoLike(userId, newsFeed.getId());
+        Like like = doOrUndoLikeNewsFeed(userId, newsFeed);
+        like = newsFeed.doOrUndoLike(like);
         like = likeRepository.save(like);
-        newsFeed.addOrSubtractLike(like);
-        return newsFeedRepository.save(newsFeed);
+        newsFeedRepository.save(newsFeed);
+        return like;
     }
 
-    private Like doOrUndoLike(Long userId, Long newsFeedId){
+    private Like doOrUndoLikeNewsFeed(Long userId, NewsFeed newsFeed){
         try {
-            Like like = likeRepository.findByUserIdAndNewsFeedId(userId, newsFeedId);
-            return like.doOrUndo();
+            return likeRepository.findByUserIdAndNewsFeedId(userId, newsFeed.getId());
         } catch (NotFoundNewsFeedLikeException e) {
-            return  Like.createLike(userId, newsFeedId);
+            return  Like.createLike(userId, newsFeed.getId());
         } catch (Exception e) {
             log.error("error: {}", e.getMessage());
             throw e;

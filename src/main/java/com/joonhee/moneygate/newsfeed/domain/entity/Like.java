@@ -36,7 +36,7 @@ public class Like {
         return Like.builder()
             .userId(userId)
             .newsFeedId(newsFeedId)
-            .status(LikeStatus.ACTIVE)
+            .status(LikeStatus.CREATED)
             .createdAt(LocalDateTime.now())
             .build();
     }

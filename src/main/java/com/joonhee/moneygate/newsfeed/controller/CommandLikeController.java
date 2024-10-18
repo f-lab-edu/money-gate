@@ -18,7 +18,7 @@ public class CommandLikeController {
         @PathVariable String newsFeedKey,
         @RequestParam Long userId
     ) {
-        commandLikeService.addOrSubtract(userId, newsFeedKey).getKey();
+        commandLikeService.addOrSubtract(userId, newsFeedKey);
         return LikeResponse.ok();
     }
 }

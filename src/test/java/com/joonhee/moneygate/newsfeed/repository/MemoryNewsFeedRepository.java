@@ -22,7 +22,6 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
             .key(newsFeed.getKey())
             .mentorId(newsFeed.getMentorId())
             .status(newsFeed.getStatus())
-            .likes(newsFeed.getLikes())
             .createdAt(newsFeed.getCreatedAt())
             .updatedAt(newsFeed.getUpdatedAt())
             .deletedAt(newsFeed.getDeletedAt())

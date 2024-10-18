@@ -29,10 +29,10 @@ class NewsFeedTest {
         NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(mentorId, "오늘은 무엇을 할까요?");
         Like like = LikeStub.createWillBeDeletedDummyLike();
         // Action
-        newsFeed.addOrSubtractLike(like);
+        Like didLike = newsFeed.doOrUndoLike(like);
 
         // Assert
-        assertThat(newsFeed.getLikes().getUserIds().size()).isEqualTo(1);
+        assertThat(didLike.getStatus()).isEqualTo(LikeStatus.ACTIVE);
     }
 
     @Test
@@ -42,11 +42,11 @@ class NewsFeedTest {
         Long mentorId = 1L;
         NewsFeed newsFeed = NewsFeed.createNewsFeedByPublic(mentorId, "오늘은 무엇을 할까요?");
         Like like = LikeStub.createWillBeDeletedDummyLike();
-        newsFeed.addOrSubtractLike(like);
+        newsFeed.doOrUndoLike(like);
         // Action
-        newsFeed.addOrSubtractLike(like);
+        Like revokeLike = newsFeed.doOrUndoLike(like);
 
         // Assert
-        assertThat(newsFeed.getLikes().getUserIds().size()).isEqualTo(0);
+        assertThat(revokeLike.getStatus()).isEqualTo(LikeStatus.DELETED);
     }
 }

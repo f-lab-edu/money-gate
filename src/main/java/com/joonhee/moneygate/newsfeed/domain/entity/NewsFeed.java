@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -23,7 +22,6 @@ public class NewsFeed {
     private Long mentorId;
     private String body;
     private ContentOpenStatus status;
-    private Likes likes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -35,7 +33,6 @@ public class NewsFeed {
         Long mentorId,
         String body,
         ContentOpenStatus status,
-        Likes likes,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
         LocalDateTime deletedAt
@@ -45,7 +42,6 @@ public class NewsFeed {
         this.mentorId = mentorId;
         this.body = body;
         this.status = status;
-        this.likes = likes;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -56,7 +52,6 @@ public class NewsFeed {
             .key(UUID.randomUUID().toString())
             .mentorId(mentorId)
             .body(body)
-            .likes(new Likes())
             .status(ContentOpenStatus.PUBLIC)
             .createdAt(LocalDateTime.now())
             .build();
@@ -67,7 +62,6 @@ public class NewsFeed {
             .key(UUID.randomUUID().toString())
             .mentorId(mentorId)
             .body(body)
-            .likes(new Likes())
             .status(ContentOpenStatus.DRAFT)
             .createdAt(LocalDateTime.now())
             .build();
@@ -90,7 +84,7 @@ public class NewsFeed {
         return this;
     }
 
-    public List<Long> addOrSubtractLike(Like like) {
-        return this.likes.addOrSubtract(like);
+    public Like doOrUndoLike(Like like) {
+        return like.doOrUndo();
     }
 }
