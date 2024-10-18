@@ -2,10 +2,8 @@ server:
   port: 8080
   tomcat:
     threads:
-      max: 100
-      min-spare: 10
+      max: 200
     accept-count: 50
-    max-connections: 150
 
 investing:
   com:
@@ -22,25 +20,35 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      maximum-pool-size: 50 # pool-locking이 발생하지 않을 수 있는 수 권장
-      minimum-idle: 10
       connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
+      idle-timeout: 60000
+      max-lifetime: 58000
+      data-source-properties:
+        socketTimeout: 8
 
   cloud:
     openfeign:
       client:
         config:
           default:
-            connectTimeout: 2000
-            readTimeout: 1000
+            connectTimeout: 3000
+            readTimeout: 10000
 
 ---
 spring:
   config:
     activate:
-      on-profile: local, dev
+      on-profile: local
+
+logging:
+  level:
+    root: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
 
 ---
 spring:
