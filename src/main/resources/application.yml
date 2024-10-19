@@ -1,3 +1,10 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+    accept-count: 50
+
 investing:
   com:
     src: "https://sbcharts.investing.com/events_charts/us"
@@ -12,10 +19,51 @@ spring:
     username: joonhee
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 60000
+      max-lifetime: 58000
+      data-source-properties:
+        socketTimeout: 8
+
   cloud:
     openfeign:
       client:
         config:
           default:
-            connectTimeout: 2000
-            readTimeout: 1000
+            connectTimeout: 3000
+            readTimeout: 10000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+logging:
+  level:
+    root: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
