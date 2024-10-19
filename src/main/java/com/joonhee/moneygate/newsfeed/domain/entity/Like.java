@@ -51,6 +51,20 @@ public class Like {
         return this;
     }
 
+    public Like doLike(){
+        this.status = LikeStatus.ACTIVE;
+        this.deletedAt = null;
+        return this;
+    }
+
+    public Like undoLike(){
+        if(this.status != LikeStatus.ACTIVE){
+            return this;
+        }
+        delete();
+        return this;
+    }
+
     private void delete() {
         this.deletedAt = LocalDateTime.now();
         this.status = LikeStatus.DELETED;

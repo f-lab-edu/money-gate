@@ -50,7 +50,7 @@ class CommandLikeServiceTest {
         createdNewsFeed = newsFeedRepository.save(createdNewsFeed);
 
         // Action
-        Like didLike = this.commandLikeService.addOrSubtract(userIdWhoClickLike.getId(), createdNewsFeed.getKey());
+        Like didLike = this.commandLikeService.doLike(userIdWhoClickLike.getId(), createdNewsFeed.getKey());
 
         // Assert
         assertThat(didLike.getStatus()).isEqualTo(LikeStatus.ACTIVE);
@@ -69,12 +69,12 @@ class CommandLikeServiceTest {
         User userIdWhoClickLike = UserBuilder.createDummyUser();
         userIdWhoClickLike = userRepository.save(userIdWhoClickLike);
 
-        Like didLike = this.commandLikeService.addOrSubtract(userIdWhoClickLike.getId(), createdNewsFeed.getKey());
+        Like didLike = this.commandLikeService.doLike(userIdWhoClickLike.getId(), createdNewsFeed.getKey());
         createdNewsFeed = newsFeedRepository.save(createdNewsFeed);
 
 
         // Action
-        Like revokeLike = this.commandLikeService.addOrSubtract(userIdWhoClickLike.getId(), createdNewsFeed.getKey());
+        Like revokeLike = this.commandLikeService.undoLike(userIdWhoClickLike.getId(), createdNewsFeed.getKey());
 
         // Assert
         assertThat(revokeLike.getStatus()).isEqualTo(LikeStatus.DELETED);

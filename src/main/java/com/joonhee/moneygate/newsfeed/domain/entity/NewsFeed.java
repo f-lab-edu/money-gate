@@ -87,4 +87,12 @@ public class NewsFeed {
     public Like doOrUndoLike(Like like) {
         return like.doOrUndo();
     }
+
+    public Like doLike(Like like) {
+        return like.doLike();
+    }
+
+    public Like undoLike(Like like) {
+        return like.undoLike();
+    }
 }

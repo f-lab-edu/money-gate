@@ -18,7 +18,16 @@ public class CommandLikeController {
         @PathVariable String newsFeedKey,
         @RequestParam Long userId
     ) {
-        commandLikeService.addOrSubtract(userId, newsFeedKey);
+        commandLikeService.doLike(userId, newsFeedKey);
+        return LikeResponse.ok();
+    }
+
+    @PostMapping("/newsfeed/{newsFeedKey}/undo-like")
+    public LikeResponse undoLike(
+        @PathVariable String newsFeedKey,
+        @RequestParam Long userId
+    ) {
+        commandLikeService.undoLike(userId, newsFeedKey);
         return LikeResponse.ok();
     }
 }
