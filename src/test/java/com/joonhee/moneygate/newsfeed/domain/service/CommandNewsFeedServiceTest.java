@@ -5,10 +5,12 @@ import account.domain.repository.UserRepositoryHelper;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.exception.InvalidUserPermission;
-import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
+import com.joonhee.moneygate.account.repository.MemoryUserRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
+import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
+import com.joonhee.moneygate.newsfeed.repository.MemoryLikeRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
 import com.joonhee.moneygate.validator.MentorValidator;
 import newsfeed.domain.repository.NewsFeedRepositoryHelper;
@@ -23,6 +25,7 @@ class CommandNewsFeedServiceTest {
     private CommandNewsFeedService commandNewsFeedService;
     private UserRepository mentorRepository;
     private NewsFeedRepository newsFeedRepository;
+    private LikeRepository likeRepository;
     private MentorValidator mentorValidator;
     private NewsFeedRepositoryHelper newsFeedRepositoryHelper;
     private MentorRepositoryHelper mentorRepositoryHelper;
@@ -30,13 +33,15 @@ class CommandNewsFeedServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.mentorRepository = new MemoryMentorRepository();
+        this.mentorRepository = new MemoryUserRepository();
         this.newsFeedRepository = new MemoryNewsFeedRepository();
+        this.likeRepository = new MemoryLikeRepository();
         this.mentorValidator = new MentorValidator(mentorRepository);
 
         this.commandNewsFeedService = new CommandNewsFeedService(
             this.mentorRepository,
             this.newsFeedRepository,
+            this.likeRepository,
             this.mentorValidator
         );
 
