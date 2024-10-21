@@ -2,7 +2,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
-import com.joonhee.moneygate.account.repository.MemoryMentorRepository;
+import com.joonhee.moneygate.account.repository.MemoryUserRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.dto.NewsFeedDetail;
@@ -23,7 +23,7 @@ class QueryNewsFeedServiceTest {
     @BeforeEach
     void setUp() {
         this.newsFeedRepository = new MemoryNewsFeedRepository();
-        this.mentorRepository = new MemoryMentorRepository();
+        this.mentorRepository = new MemoryUserRepository();
         this.queryNewsFeedService = new QueryNewsFeedService(newsFeedRepository, mentorRepository);
     }
 
