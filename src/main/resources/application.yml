@@ -23,8 +23,8 @@ spring:
       connection-timeout: 30000
       idle-timeout: 60000
       max-lifetime: 58000
-#      data-source-properties:
-#        socketTimeout: 30
+      data-source-properties:
+        socketTimeout: 8
 
   cloud:
     openfeign:
