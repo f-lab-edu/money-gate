@@ -14,9 +14,9 @@ public class NewsFeedValidator {
         this.newsFeedRepository = newsFeedRepository;
     }
 
-    public NewsFeed validateNewsFeed(String newsFeedKey) {
+    public void validateNewsFeed(String newsFeedKey) {
         try{
-            return newsFeedRepository.findByKey(newsFeedKey);
+            newsFeedRepository.findByKey(newsFeedKey);
         }catch (NotFoundNewsFeedException e) {
             throw e;
         }

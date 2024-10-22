@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface UserRepository {
     User save(User mentor);
-    User findById(Long id) throws IllegalArgumentException;
+    User findById(Long id);
     List<User> findByIds(List<Long> ids);
 }

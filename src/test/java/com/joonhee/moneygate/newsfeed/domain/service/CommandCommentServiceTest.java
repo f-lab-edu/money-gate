@@ -3,6 +3,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 import account.domain.entity.UserBuilder;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
+import com.joonhee.moneygate.account.exception.NotFoundUserException;
 import com.joonhee.moneygate.account.repository.MemoryUserRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.Comment;
 import com.joonhee.moneygate.newsfeed.domain.entity.CommentStatus;
@@ -13,6 +14,7 @@ import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedException;
 import com.joonhee.moneygate.newsfeed.repository.MemoryCommentRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
 import com.joonhee.moneygate.validator.NewsFeedValidator;
+import com.joonhee.moneygate.validator.UserValidator;
 import newsfeed.domain.entity.NewsFeedBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +30,7 @@ class CommandCommentServiceTest {
     private CommentRepository commentRepository;
     private NewsFeedRepository newsFeedRepository;
     private NewsFeedValidator newsFeedValidator;
+    private UserValidator userValidator;
     private CommandCommentService commandCommentService;
 
     @BeforeEach
@@ -36,7 +39,13 @@ class CommandCommentServiceTest {
         commentRepository = new MemoryCommentRepository();
         newsFeedRepository = new MemoryNewsFeedRepository();
         newsFeedValidator = new NewsFeedValidator(newsFeedRepository);
-        commandCommentService = new CommandCommentService(commentRepository, newsFeedValidator);
+        userValidator = new UserValidator(userRepository);
+        commandCommentService = new CommandCommentService(
+            commentRepository,
+            newsFeedRepository,
+            userValidator,
+            newsFeedValidator
+        );
     }
 
 
@@ -136,5 +145,21 @@ class CommandCommentServiceTest {
         User finalUser = user;
         assertThatThrownBy(() -> commandCommentService.createCommentByPublic(finalUser.getId(), NON_EXIST_KEY, "댓글 내용"))
             .isInstanceOf(NotFoundNewsFeedException.class);
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 유저로 댓글을 게시글에 다는 경우 예외 발생")
+    void cannotCreateCommentWithNonExistUser() {
+        // Arrange
+        User mentor = UserBuilder.createDummyMentor();
+        mentor = userRepository.save(mentor);
+        NewsFeed newsFeed = NewsFeedBuilder.createDummyPublicNewsFeed(mentor.getId());
+        newsFeed = newsFeedRepository.save(newsFeed);
+        Long NON_EXIST_USER_ID = 999L;
+
+        // Action & Assert
+        NewsFeed finalNewsFeed = newsFeed;
+        assertThatThrownBy(() -> commandCommentService.createCommentByPublic(NON_EXIST_USER_ID, finalNewsFeed.getKey(), "댓글 내용"))
+            .isInstanceOf(NotFoundUserException.class);
     }
 }
