@@ -1,8 +1,8 @@
 package com.joonhee.moneygate.configure;
 
 
-import com.joonhee.moneygate.jdbcconverter.account.JsonToRolesReadingConverter;
-import com.joonhee.moneygate.jdbcconverter.account.RolesToJsonWritingConverter;
+import com.joonhee.moneygate.jdbcconverter.account.roles.JsonToRolesReadingConverter;
+import com.joonhee.moneygate.jdbcconverter.account.roles.RolesToJsonWritingConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 

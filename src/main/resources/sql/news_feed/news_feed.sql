@@ -12,3 +12,8 @@ CREATE TABLE news_feed
     CONSTRAINT uc_news_feed_key UNIQUE KEY (news_feed_key)
 )
     COLLATE = UTF8MB4_UNICODE_CI;
+
+
+alter table news_feed
+    add likes TEXT NOT NULL COMMENT '좋아요한 유저 식별자 목록'
+        after body;

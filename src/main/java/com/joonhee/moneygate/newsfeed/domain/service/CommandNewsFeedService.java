@@ -2,6 +2,7 @@ package com.joonhee.moneygate.newsfeed.domain.service;
 
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
+import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.validator.MentorValidator;
 import org.springframework.stereotype.Service;
@@ -11,15 +12,18 @@ public class CommandNewsFeedService {
 
     private final UserRepository mentorRepository;
     private final NewsFeedRepository newsFeedRepository;
+    private final LikeRepository likeRepository;
     private final MentorValidator mentorValidator;
 
     public CommandNewsFeedService(
         UserRepository mentorRepository,
         NewsFeedRepository newsFeedRepository,
+        LikeRepository likeRepository,
         MentorValidator mentorValidator
     ) {
         this.mentorRepository = mentorRepository;
         this.newsFeedRepository = newsFeedRepository;
+        this.likeRepository = likeRepository;
         this.mentorValidator = mentorValidator;
     }
 
