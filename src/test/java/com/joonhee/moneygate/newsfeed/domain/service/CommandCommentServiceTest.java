@@ -13,8 +13,6 @@ import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedException;
 import com.joonhee.moneygate.newsfeed.repository.MemoryCommentRepository;
 import com.joonhee.moneygate.newsfeed.repository.MemoryNewsFeedRepository;
-import com.joonhee.moneygate.validator.NewsFeedValidator;
-import com.joonhee.moneygate.validator.UserValidator;
 import newsfeed.domain.entity.NewsFeedBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,8 +27,6 @@ class CommandCommentServiceTest {
     private UserRepository userRepository;
     private CommentRepository commentRepository;
     private NewsFeedRepository newsFeedRepository;
-    private NewsFeedValidator newsFeedValidator;
-    private UserValidator userValidator;
     private CommandCommentService commandCommentService;
 
     @BeforeEach
@@ -38,13 +34,10 @@ class CommandCommentServiceTest {
         userRepository = new MemoryUserRepository();
         commentRepository = new MemoryCommentRepository();
         newsFeedRepository = new MemoryNewsFeedRepository();
-        newsFeedValidator = new NewsFeedValidator(newsFeedRepository);
-        userValidator = new UserValidator(userRepository);
         commandCommentService = new CommandCommentService(
             commentRepository,
             newsFeedRepository,
-            userValidator,
-            newsFeedValidator
+            userRepository
         );
     }
 
