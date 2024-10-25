@@ -11,11 +11,20 @@ import java.util.List;
 
 @Configuration
 public class JdbcConfig extends AbstractJdbcConfiguration {
+    private final JsonToRolesReadingConverter jsonToRolesReadingConverter;
+    private final RolesToJsonWritingConverter rolesToJsonWritingConverter;
+
+    public JdbcConfig(
+        JsonToRolesReadingConverter jsonToRolesReadingConverter,
+        RolesToJsonWritingConverter rolesToJsonWritingConverter) {
+        this.jsonToRolesReadingConverter = jsonToRolesReadingConverter;
+        this.rolesToJsonWritingConverter = rolesToJsonWritingConverter;
+    }
     @Override
     protected List<?> userConverters() {
         return Arrays.asList(
-            new JsonToRolesReadingConverter(),
-            new RolesToJsonWritingConverter()
+            jsonToRolesReadingConverter,
+            rolesToJsonWritingConverter
         );
     }
 }
