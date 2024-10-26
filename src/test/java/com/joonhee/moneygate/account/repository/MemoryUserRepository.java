@@ -2,7 +2,7 @@ package com.joonhee.moneygate.account.repository;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
-import com.joonhee.moneygate.account.exception.NotFoundMentorException;
+import com.joonhee.moneygate.account.exception.NotFoundUserException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +38,7 @@ public class MemoryUserRepository implements UserRepository {
     public User findById(Long id) throws IllegalArgumentException {
         User mentor = mentors.get(id);
         if (mentor == null) {
-            throw new NotFoundMentorException(id);
+            throw new NotFoundUserException(id);
         }
         return mentor;
     }
