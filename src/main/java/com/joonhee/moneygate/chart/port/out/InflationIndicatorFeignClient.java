@@ -1,9 +1,10 @@
 package com.joonhee.moneygate.chart.port.out;
 
+import com.joonhee.moneygate.configure.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(name = "investing-com-inflation-indicator", url = "${investing.com.src}")
+@FeignClient(name = "investing-com-inflation-indicator", url = "${investing.url}", configuration = FeignClientConfig.class)
 public interface InflationIndicatorFeignClient {
     @GetMapping("/421.json")
     InvestingComChartResponse getCoreCpi();

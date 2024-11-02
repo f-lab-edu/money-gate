@@ -6,8 +6,9 @@ server:
     accept-count: 50
 
 investing:
-  com:
-    src: "https://sbcharts.investing.com/events_charts/us"
+  url: "https://sbcharts.investing.com/events_charts/us"
+  connectTimeout: 3000
+  readTimeout: 10000
 
 springdoc:
   swagger-ui:
