@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CrudMentorRepository extends CrudRepository<User, Long> {
-    @Query("SELECT * FROM user WHERE user_id IN (:ids)")
+    @Query("SELECT * FROM users WHERE id IN (:ids)")
     List<User> findByIds(List<Long> ids);
 }

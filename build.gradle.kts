@@ -49,6 +49,9 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // H2
+    testImplementation("com.h2database:h2")
 }
 
 tasks.withType<Test> {

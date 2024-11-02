@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Table("news_feed_comment")
 public class Comment {
     @Id
-    @Column("comment_id")
     private Long id;
     @Column("user_id")
     private Long userId;

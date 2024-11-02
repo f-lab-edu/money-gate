@@ -27,14 +27,6 @@ spring:
       data-source-properties:
         socketTimeout: 20
 
-  cloud:
-    openfeign:
-      client:
-        config:
-          default:
-            connectTimeout: 3000
-            readTimeout: 10000
-
 ---
 spring:
   config:
@@ -50,6 +42,17 @@ spring:
   config:
     activate:
       on-profile: dev
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 60000
+      idle-timeout: 60000
+      max-lifetime: 58000
+      data-source-properties:
+        socketTimeout: 120
 
 ---
 spring:

@@ -5,15 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Getter
 @NoArgsConstructor
+@Table("users")
 public class User {
     @Id
-    @Column("user_id")
     private Long id;
     private String email;
     private String nickName;
