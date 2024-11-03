@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Table("news_feed_like")
 public class Like {
     @Id
-    @Column("like_id")
     private Long id;
     private Long userId;
     private Long newsFeedId;

@@ -14,7 +14,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class NewsFeed {
     @Id
-    @Column("news_feed_id")
     private Long id;
     @Column("news_feed_key")
     private String key;
