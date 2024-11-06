@@ -1,5 +1,6 @@
 package com.joonhee.moneygate.newsfeed.controller;
 
+import com.joonhee.moneygate.common.HttpApiResponse;
 import com.joonhee.moneygate.newsfeed.domain.service.CommandNewsFeedService;
 import com.joonhee.moneygate.newsfeed.dto.request.CreateNewsFeedRequest;
 import com.joonhee.moneygate.newsfeed.dto.request.UpdateNewsFeedRequest;
@@ -14,20 +15,20 @@ public class CommandNewsFeedController {
     private final CommandNewsFeedService commandNewsFeedService;
 
     @PostMapping("/newsfeed")
-    public String createNewsFeed(@RequestBody CreateNewsFeedRequest request) {
-        return commandNewsFeedService.createNewsFeedByPublic(request.mentorId(), request.body()).getKey();
+    public HttpApiResponse<String> createNewsFeed(@RequestBody CreateNewsFeedRequest request) {
+        return HttpApiResponse.of(commandNewsFeedService.createNewsFeedByPublic(request.mentorId(), request.body()).getKey());
     }
 
     @PutMapping("/newsfeed/{newsFeedKey}")
-    public String updateNewsFeed(
+    public HttpApiResponse<String> updateNewsFeed(
         @PathVariable String newsFeedKey,
         @RequestBody UpdateNewsFeedRequest request
     ) {
-        return commandNewsFeedService.updateNewsFeed(newsFeedKey, request.body()).getKey();
+        return HttpApiResponse.of(commandNewsFeedService.updateNewsFeed(newsFeedKey, request.body()).getKey());
     }
 
     @DeleteMapping("/newsfeed/{newsFeedKey}")
-    public String deleteNewsFeed(@PathVariable String newsFeedKey) {
-        return commandNewsFeedService.deleteNewsFeed(newsFeedKey).getKey();
+    public HttpApiResponse<String> deleteNewsFeed(@PathVariable String newsFeedKey) {
+        return HttpApiResponse.of(commandNewsFeedService.deleteNewsFeed(newsFeedKey).getKey());
     }
 }

@@ -1,5 +1,6 @@
 package com.joonhee.moneygate.newsfeed.controller;
 
+import com.joonhee.moneygate.common.HttpApiResponse;
 import com.joonhee.moneygate.newsfeed.application.dto.LikeResponse;
 import com.joonhee.moneygate.newsfeed.domain.service.CommandLikeService;
 import lombok.RequiredArgsConstructor;
@@ -14,20 +15,20 @@ public class CommandLikeController {
     private final CommandLikeService commandLikeService;
 
     @PostMapping("/newsfeed/{newsFeedKey}/like")
-    public LikeResponse addOrSubtractLike(
+    public HttpApiResponse<LikeResponse> addOrSubtractLike(
         @PathVariable String newsFeedKey,
         @RequestParam Long userId
     ) {
         commandLikeService.doLike(userId, newsFeedKey);
-        return LikeResponse.ok();
+        return HttpApiResponse.of(LikeResponse.ok());
     }
 
     @PostMapping("/newsfeed/{newsFeedKey}/undo-like")
-    public LikeResponse undoLike(
+    public HttpApiResponse<LikeResponse> undoLike(
         @PathVariable String newsFeedKey,
         @RequestParam Long userId
     ) {
         commandLikeService.undoLike(userId, newsFeedKey);
-        return LikeResponse.ok();
+        return HttpApiResponse.of(LikeResponse.ok());
     }
 }

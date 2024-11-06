@@ -26,49 +26,49 @@ public class InflationIndicatorChartQueryController {
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/pce-price-index")
-    EconomyChart getPcePriceIndex() {
-        return leadingIndicator.getPcePriceIndex();
+    HttpApiResponse<EconomyChart> getPcePriceIndex() {
+        return HttpApiResponse.of(leadingIndicator.getPcePriceIndex());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/personal-income")
-    EconomyChart getPersonalIncome() {
-        return leadingIndicator.getPersonalIncome();
+    HttpApiResponse<EconomyChart> getPersonalIncome() {
+        return HttpApiResponse.of(leadingIndicator.getPersonalIncome());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/retail-sales")
-    EconomyChart getRetailSales() {
-        return leadingIndicator.getRetailSales();
+    HttpApiResponse<EconomyChart> getRetailSales() {
+        return HttpApiResponse.of(leadingIndicator.getRetailSales());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/new-home-sales")
-    EconomyChart getNewHomeSales() {
-        return leadingIndicator.getNewHomeSales();
+    HttpApiResponse<EconomyChart> getNewHomeSales() {
+        return HttpApiResponse.of(leadingIndicator.getNewHomeSales());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/existing-home-sales")
-    EconomyChart getExistingHomeSales() {
-        return leadingIndicator.getExistingHomeSales();
+    HttpApiResponse<EconomyChart> getExistingHomeSales() {
+        return HttpApiResponse.of(leadingIndicator.getExistingHomeSales());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/all-car-sales")
-    EconomyChart getAllCarSales() {
-        return leadingIndicator.getAllCarSales();
+    HttpApiResponse<EconomyChart> getAllCarSales() {
+        return HttpApiResponse.of(leadingIndicator.getAllCarSales());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/ism-manufacturing-pmi")
-    EconomyChart getIsmManufacturingPmi() {
-        return leadingIndicator.getIsmManufacturingPMI();
+    HttpApiResponse<EconomyChart> getIsmManufacturingPmi() {
+        return HttpApiResponse.of(leadingIndicator.getIsmManufacturingPMI());
     }
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/manufacturing-pmi")
-    EconomyChart getManufacturingPmi() {
-        return leadingIndicator.getManufacturingPMI();
+    HttpApiResponse<EconomyChart> getManufacturingPmi() {
+        return HttpApiResponse.of(leadingIndicator.getManufacturingPMI());
     }
 }

@@ -3,10 +3,12 @@ package com.joonhee.moneygate.chart.controller;
 
 import com.joonhee.moneygate.chart.service.InflationIndicatorService;
 import com.joonhee.moneygate.chart.vo.EconomyChart;
+import com.joonhee.moneygate.common.HttpApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/chart")
 public class LeadingIndicatorChartQueryController {
@@ -18,31 +20,31 @@ public class LeadingIndicatorChartQueryController {
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/core-cpi")
-    EconomyChart getCoreCpi() {
-        return inflationIndicator.getCoreCpi();
+    HttpApiResponse<EconomyChart> getCoreCpi() {
+        return HttpApiResponse.of(inflationIndicator.getCoreCpi());
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/cpi")
-    EconomyChart getCpi() {
-        return inflationIndicator.getCpi();
+    HttpApiResponse<EconomyChart> getCpi() {
+        return HttpApiResponse.of(inflationIndicator.getCpi());
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/core-ppi")
-    EconomyChart getCorePpi() {
-        return inflationIndicator.getCorePpi();
+    HttpApiResponse<EconomyChart> getCorePpi() {
+        return HttpApiResponse.of(inflationIndicator.getCorePpi());
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/employment-cost-index")
-    EconomyChart getEmploymentCostIndex() {
-        return inflationIndicator.getEmploymentCostIndex();
+    HttpApiResponse<EconomyChart> getEmploymentCostIndex() {
+        return HttpApiResponse.of(inflationIndicator.getEmploymentCostIndex());
     }
 
     @Operation(tags = "LeadingIndicator")
     @GetMapping("/average-hourly-earnings")
-    EconomyChart getAverageHourlyEarnings() {
-        return inflationIndicator.getAverageHourlyEarnings();
+    HttpApiResponse<EconomyChart> getAverageHourlyEarnings() {
+        return HttpApiResponse.of(inflationIndicator.getAverageHourlyEarnings());
     }
 }
