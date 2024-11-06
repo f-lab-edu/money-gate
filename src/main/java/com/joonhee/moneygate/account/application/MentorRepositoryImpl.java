@@ -2,10 +2,10 @@ package com.joonhee.moneygate.account.application;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
-import com.joonhee.moneygate.account.exception.NotFoundUserException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Repository
 public class MentorRepositoryImpl implements UserRepository {
@@ -23,7 +23,7 @@ public class MentorRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Long id) throws IllegalArgumentException {
-        return crudMentorRepository.findById(id).orElseThrow(() -> new NotFoundUserException(id));
+        return crudMentorRepository.findById(id).orElseThrow(() -> new NoSuchElementException("userId: " + id));
     }
 
     @Override

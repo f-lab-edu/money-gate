@@ -3,6 +3,7 @@ package com.joonhee.moneygate.chart.controller;
 
 import com.joonhee.moneygate.chart.service.LeadingIndicatorService;
 import com.joonhee.moneygate.chart.vo.EconomyChart;
+import com.joonhee.moneygate.common.HttpApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,8 @@ public class InflationIndicatorChartQueryController {
 
     @Operation(tags = "InflationIndicator")
     @GetMapping("/cb-consumer")
-    EconomyChart getCbConsumer() {
-        return leadingIndicator.getCbConsumer();
+    HttpApiResponse<EconomyChart> getCbConsumer() {
+        return HttpApiResponse.of(leadingIndicator.getCbConsumer());
     }
 
     @Operation(tags = "InflationIndicator")

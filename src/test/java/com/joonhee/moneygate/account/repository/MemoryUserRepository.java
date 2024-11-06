@@ -2,10 +2,10 @@ package com.joonhee.moneygate.account.repository;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
-import com.joonhee.moneygate.account.exception.NotFoundUserException;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MemoryUserRepository implements UserRepository {
     private final HashMap<Long, User> mentors = new HashMap<>();
@@ -38,7 +38,7 @@ public class MemoryUserRepository implements UserRepository {
     public User findById(Long id) throws IllegalArgumentException {
         User mentor = mentors.get(id);
         if (mentor == null) {
-            throw new NotFoundUserException(id);
+            throw new NoSuchElementException("id" + id);
         }
         return mentor;
     }

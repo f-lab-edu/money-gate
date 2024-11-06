@@ -2,8 +2,9 @@ package com.joonhee.moneygate.newsfeed.application;
 
 import com.joonhee.moneygate.newsfeed.domain.entity.Comment;
 import com.joonhee.moneygate.newsfeed.domain.repository.CommentRepository;
-import com.joonhee.moneygate.newsfeed.exception.NotFoundCommentException;
 import org.springframework.stereotype.Repository;
+
+import java.util.NoSuchElementException;
 
 @Repository
 public class CommentRepositoryImpl implements CommentRepository {
@@ -20,6 +21,8 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     @Override
     public Comment findById(Long commentId) {
-        return crudCommentRepository.findById(commentId).orElseThrow(() -> new NotFoundCommentException(commentId));
+        return crudCommentRepository.findById(commentId).orElseThrow(() -> new NoSuchElementException(
+            "존재하지 않는 댓글입니다. " + "commentId: " + commentId)
+        );
     }
 }

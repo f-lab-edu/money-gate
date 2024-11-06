@@ -20,4 +20,9 @@ public class Roles {
     public RolesDto toDto() {
         return new RolesDto(roles);
     }
+
+    @Override
+    public String toString() {
+        return roles.stream().map(Role::name).reduce((a, b) -> a + ", " + b).orElse("");
+    }
 }

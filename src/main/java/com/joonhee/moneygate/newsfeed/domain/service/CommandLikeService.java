@@ -4,9 +4,10 @@ import com.joonhee.moneygate.newsfeed.domain.entity.Like;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
-import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedLikeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
@@ -41,13 +42,10 @@ public class CommandLikeService {
     }
 
     private Like getLike(Long userId, NewsFeed newsFeed) {
-        try{
+        try {
             return likeRepository.findByUserIdAndNewsFeedId(userId, newsFeed.getId());
-        }catch (NotFoundNewsFeedLikeException e) {
-            return  Like.createLike(userId, newsFeed.getId());
-        } catch (Exception e) {
-            log.error("error: {}", e.getMessage());
-            throw e;
+        } catch (NoSuchElementException e) {
+            return Like.createLike(userId, newsFeed.getId());
         }
     }
 }

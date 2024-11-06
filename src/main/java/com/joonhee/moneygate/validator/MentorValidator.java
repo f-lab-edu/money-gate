@@ -3,8 +3,10 @@ package com.joonhee.moneygate.validator;
 import com.joonhee.moneygate.account.domain.entity.Role;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
-import com.joonhee.moneygate.account.exception.InvalidUserPermission;
+import com.joonhee.moneygate.exception.ApplicationException;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Component
 public class MentorValidator {
@@ -16,8 +18,13 @@ public class MentorValidator {
 
     public void validateMentor(Long mentorId) {
         User user = userRepository.findById(mentorId);
-        if(!user.isMentor()) {
-            throw new InvalidUserPermission(user.getRoles(), Role.NEWS_FEED_WRITER);
+        if (!user.isMentor()) {
+            throw new ApplicationException(
+                "사용자 권한이 유효하지 않습니다.",
+                Map.of(
+                    "hasRole", user.getRoles().toString(),
+                    "requiredRole", Role.NEWS_FEED_WRITER.name())
+            );
         }
     }
 }
