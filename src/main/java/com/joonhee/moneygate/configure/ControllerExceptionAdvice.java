@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.configure;
 
-import com.joonhee.moneygate.common.HttpApiResponse;
+import com.joonhee.moneygate.common.httpresponse.HttpApiResponse;
 import com.joonhee.moneygate.exception.ApplicationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

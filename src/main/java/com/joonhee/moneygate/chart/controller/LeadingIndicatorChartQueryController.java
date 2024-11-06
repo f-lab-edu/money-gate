@@ -3,7 +3,7 @@ package com.joonhee.moneygate.chart.controller;
 
 import com.joonhee.moneygate.chart.service.InflationIndicatorService;
 import com.joonhee.moneygate.chart.vo.EconomyChart;
-import com.joonhee.moneygate.common.HttpApiResponse;
+import com.joonhee.moneygate.common.httpresponse.HttpApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

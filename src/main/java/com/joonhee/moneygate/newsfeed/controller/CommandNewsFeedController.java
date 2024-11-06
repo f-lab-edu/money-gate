@@ -1,13 +1,11 @@
 package com.joonhee.moneygate.newsfeed.controller;
 
-import com.joonhee.moneygate.common.HttpApiResponse;
+import com.joonhee.moneygate.common.httpresponse.HttpApiResponse;
 import com.joonhee.moneygate.newsfeed.domain.service.CommandNewsFeedService;
 import com.joonhee.moneygate.newsfeed.dto.request.CreateNewsFeedRequest;
 import com.joonhee.moneygate.newsfeed.dto.request.UpdateNewsFeedRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor

@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.controller;
 
-import com.joonhee.moneygate.common.HttpApiResponse;
+import com.joonhee.moneygate.common.httpresponse.HttpApiResponse;
 import com.joonhee.moneygate.newsfeed.application.dto.LikeResponse;
 import com.joonhee.moneygate.newsfeed.domain.service.CommandLikeService;
 import lombok.RequiredArgsConstructor;

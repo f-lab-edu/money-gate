@@ -1,6 +1,6 @@
 package com.joonhee.moneygate.newsfeed.controller;
 
-import com.joonhee.moneygate.common.HttpApiResponse;
+import com.joonhee.moneygate.common.httpresponse.HttpApiResponse;
 import com.joonhee.moneygate.newsfeed.domain.service.CommandCommentService;
 import com.joonhee.moneygate.newsfeed.dto.request.CreateCommentRequest;
 import com.joonhee.moneygate.newsfeed.dto.request.UpdateCommentRequest;
