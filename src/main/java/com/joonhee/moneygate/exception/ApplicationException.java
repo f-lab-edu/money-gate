@@ -7,8 +7,8 @@ import java.util.Map;
 
 @Getter
 public class ApplicationException extends RuntimeException {
-    CodeEnum code;
-    Map<String, Object> data;
+    private CodeEnum code;
+    private Map<String, Object> data;
     public ApplicationException(CodeEnum code, String message, Map<String, Object> data) {
         super(message);
         this.code = code;

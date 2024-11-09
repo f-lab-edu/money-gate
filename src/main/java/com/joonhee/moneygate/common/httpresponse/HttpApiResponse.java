@@ -10,8 +10,8 @@ import java.util.Map;
 @Builder
 @Getter
 public class HttpApiResponse<T>{
-    CodeEnum code;
-    String message;
+    private CodeEnum code;
+    private String message;
     T data;
 
     public static <T> HttpApiResponse of(T data) {
