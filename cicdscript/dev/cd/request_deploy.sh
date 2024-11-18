@@ -9,9 +9,9 @@ API_SECRET_KEY=${API_SECRET_KEY}
 ## 배포 시작
 echo "배포 시작 요청"
 
-project_id="10119"
-stage_id="11230"
-scenario_id="12556"
+project_id=${project_id}
+stage_id=${stage_id}
+scenario_id=${scenario_id}
 method="POST"
 uri="/api/v1/project/${project_id}/stage/${stage_id}/scenario/${scenario_id}/deploy"
 
