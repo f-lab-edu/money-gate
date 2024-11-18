@@ -1,10 +1,12 @@
 package com.joonhee.moneygate.newsfeed.repository;
 
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.Comment;
 import com.joonhee.moneygate.newsfeed.domain.repository.CommentRepository;
-import com.joonhee.moneygate.newsfeed.exception.NotFoundCommentException;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class MemoryCommentRepository implements CommentRepository {
     private static Long sequence = 0L;
@@ -32,7 +34,7 @@ public class MemoryCommentRepository implements CommentRepository {
         if (comments.containsKey(commentId)) {
             return comments.get(commentId);
         }
-        throw new NotFoundCommentException(commentId);
+        throw new ApplicationException(CodeEnum.FRS_003, "존재하지 않는 댓글입니다. " + "commentId: " + commentId);
     }
 
     private Long getCommentId(Long commentId) {

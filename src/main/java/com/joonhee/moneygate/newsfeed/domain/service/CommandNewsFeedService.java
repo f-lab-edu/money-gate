@@ -10,20 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommandNewsFeedService {
 
-    private final UserRepository mentorRepository;
     private final NewsFeedRepository newsFeedRepository;
-    private final LikeRepository likeRepository;
     private final MentorValidator mentorValidator;
 
     public CommandNewsFeedService(
-        UserRepository mentorRepository,
         NewsFeedRepository newsFeedRepository,
-        LikeRepository likeRepository,
         MentorValidator mentorValidator
     ) {
-        this.mentorRepository = mentorRepository;
         this.newsFeedRepository = newsFeedRepository;
-        this.likeRepository = likeRepository;
         this.mentorValidator = mentorValidator;
     }
 

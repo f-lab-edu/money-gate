@@ -4,7 +4,7 @@ import account.domain.repository.MentorRepositoryHelper;
 import account.domain.repository.UserRepositoryHelper;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
-import com.joonhee.moneygate.account.exception.InvalidUserPermission;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.account.repository.MemoryUserRepository;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
@@ -39,9 +39,7 @@ class CommandNewsFeedServiceTest {
         this.mentorValidator = new MentorValidator(mentorRepository);
 
         this.commandNewsFeedService = new CommandNewsFeedService(
-            this.mentorRepository,
             this.newsFeedRepository,
-            this.likeRepository,
             this.mentorValidator
         );
 
@@ -113,6 +111,6 @@ class CommandNewsFeedServiceTest {
         User user = userRepositoryHelper.createDummyUser();
         // Action, Assert
         assertThatThrownBy(() -> this.commandNewsFeedService.createNewsFeedByPublic(user.getId(), null))
-            .isInstanceOf(InvalidUserPermission.class);
+            .isInstanceOf(ApplicationException.class);
     }
 }
