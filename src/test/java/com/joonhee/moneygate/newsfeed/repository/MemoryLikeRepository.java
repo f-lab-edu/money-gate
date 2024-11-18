@@ -1,11 +1,13 @@
 package com.joonhee.moneygate.newsfeed.repository;
 
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.Like;
 import com.joonhee.moneygate.newsfeed.domain.entity.LikeStatus;
 import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
-import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedLikeException;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class MemoryLikeRepository implements LikeRepository {
     private final HashMap<Long, Like> likes = new HashMap<>();
@@ -29,7 +31,7 @@ public class MemoryLikeRepository implements LikeRepository {
         return likes.values().stream()
             .filter(like -> like.getUserId().equals(userId) && like.getNewsFeedId().equals(newsFeedId) && like.getStatus().equals(LikeStatus.ACTIVE))
             .findFirst()
-            .orElseThrow(() -> new NotFoundNewsFeedLikeException(userId, newsFeedId));
+            .orElseThrow(() -> new ApplicationException(CodeEnum.FRS_003, "유저 userId: " + userId + "가 소유한" + "newsFeedId: " + newsFeedId + "가 존재하지 않습니다."));
     }
 
     private Long generateId() {

@@ -1,10 +1,11 @@
 package com.joonhee.moneygate.newsfeed.domain.service;
 
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.Like;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
-import com.joonhee.moneygate.newsfeed.exception.NotFoundNewsFeedLikeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -41,12 +42,12 @@ public class CommandLikeService {
     }
 
     private Like getLike(Long userId, NewsFeed newsFeed) {
-        try{
+        try {
             return likeRepository.findByUserIdAndNewsFeedId(userId, newsFeed.getId());
-        }catch (NotFoundNewsFeedLikeException e) {
-            return  Like.createLike(userId, newsFeed.getId());
-        } catch (Exception e) {
-            log.error("error: {}", e.getMessage());
+        } catch (ApplicationException e) {
+            if(e.getCode().equals(CodeEnum.FRS_003)) {
+                return Like.createLike(userId, newsFeed.getId());
+            }
             throw e;
         }
     }
