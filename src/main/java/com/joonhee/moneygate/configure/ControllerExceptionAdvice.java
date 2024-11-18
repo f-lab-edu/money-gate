@@ -17,14 +17,6 @@ public class ControllerExceptionAdvice {
         );
     }
 
-    @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity handleBusinessException(RuntimeException e) {
-        e.printStackTrace();
-        return ResponseEntity.status(400).body(
-            HttpApiResponse.fromExceptionMessage(e.getMessage())
-        );
-    }
-
     @ExceptionHandler({Exception.class})
     public ResponseEntity handleSystemException(Exception e) {
         e.printStackTrace();

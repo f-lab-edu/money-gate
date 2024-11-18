@@ -2,6 +2,8 @@ package com.joonhee.moneygate.account.repository;
 
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +40,7 @@ public class MemoryUserRepository implements UserRepository {
     public User findById(Long id) throws IllegalArgumentException {
         User mentor = mentors.get(id);
         if (mentor == null) {
-            throw new NoSuchElementException("id" + id);
+            throw new ApplicationException(CodeEnum.FRS_003, "id" + id);
         }
         return mentor;
     }

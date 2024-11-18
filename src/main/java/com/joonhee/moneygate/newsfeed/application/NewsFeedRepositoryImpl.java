@@ -1,6 +1,8 @@
 package com.joonhee.moneygate.newsfeed.application;
 
 import com.joonhee.moneygate.common.SliceContent;
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.ContentOpenStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
@@ -8,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Repository
 public class NewsFeedRepositoryImpl implements NewsFeedRepository {
@@ -26,7 +27,7 @@ public class NewsFeedRepositoryImpl implements NewsFeedRepository {
     @Override
     public NewsFeed findByKey(String newsFeedKey) {
         return crudNewsFeedRepository.findByKey(newsFeedKey).orElseThrow(()
-            -> new NoSuchElementException("존재하지않는 뉴스피드입니다. " + "newsFeedKey:" + newsFeedKey.toString())
+            -> new ApplicationException(CodeEnum.FRS_003, "존재하지않는 뉴스피드입니다. " + "newsFeedKey:" + newsFeedKey.toString())
         );
     }
 

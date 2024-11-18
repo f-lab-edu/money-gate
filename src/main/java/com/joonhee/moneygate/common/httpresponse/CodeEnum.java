@@ -1,9 +1,10 @@
 package com.joonhee.moneygate.common.httpresponse;
 
 public enum CodeEnum {
-    SUCCESS("실행 성공"),
-    FAIL("실행 실패"),
-    UNAUTHORIZED_USER("권한 없음"),
+    RS_001("실행 성공"),
+    FRS_001("실행 실패"),
+    FRS_002("권한 없음"),
+    FRS_003("데이터 없음"),
     ;
 
     private final String description;

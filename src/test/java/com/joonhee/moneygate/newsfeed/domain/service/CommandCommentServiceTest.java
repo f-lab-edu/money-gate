@@ -4,6 +4,7 @@ import account.domain.entity.UserBuilder;
 import com.joonhee.moneygate.account.domain.entity.User;
 import com.joonhee.moneygate.account.domain.repository.UserRepository;
 import com.joonhee.moneygate.account.repository.MemoryUserRepository;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.Comment;
 import com.joonhee.moneygate.newsfeed.domain.entity.CommentStatus;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
@@ -16,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -136,7 +136,7 @@ class CommandCommentServiceTest {
         // Action & Assert
         User finalUser = user;
         assertThatThrownBy(() -> commandCommentService.createCommentByPublic(finalUser.getId(), NON_EXIST_KEY, "댓글 내용"))
-            .isInstanceOf(NoSuchElementException.class);
+            .isInstanceOf(ApplicationException.class);
     }
 
     @Test
@@ -152,6 +152,6 @@ class CommandCommentServiceTest {
         // Action & Assert
         NewsFeed finalNewsFeed = newsFeed;
         assertThatThrownBy(() -> commandCommentService.createCommentByPublic(NON_EXIST_USER_ID, finalNewsFeed.getKey(), "댓글 내용"))
-            .isInstanceOf(NoSuchElementException.class);
+            .isInstanceOf(ApplicationException.class);
     }
 }

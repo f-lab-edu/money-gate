@@ -1,5 +1,7 @@
 package com.joonhee.moneygate.newsfeed.application;
 
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.Like;
 import com.joonhee.moneygate.newsfeed.domain.repository.LikeRepository;
 import org.springframework.stereotype.Repository;
@@ -22,7 +24,7 @@ public class LikeRepositoryImpl implements LikeRepository {
     @Override
     public Like findByUserIdAndNewsFeedId(Long userId, Long newsFeedId) {
         return crudLikeRepository.findByUserIdAndNewsFeedId(userId, newsFeedId).orElseThrow(
-            () -> new NoSuchElementException(
+            () -> new ApplicationException(CodeEnum.FRS_003,
                 "유저 userId: " + userId + "가 소유한" + "newsFeedId: " + newsFeedId + "가 존재하지 않습니다.")
         );
     }

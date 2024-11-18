@@ -1,6 +1,8 @@
 package com.joonhee.moneygate.newsfeed.repository;
 
 import com.joonhee.moneygate.common.SliceContent;
+import com.joonhee.moneygate.common.httpresponse.CodeEnum;
+import com.joonhee.moneygate.exception.ApplicationException;
 import com.joonhee.moneygate.newsfeed.domain.entity.NewsFeed;
 import com.joonhee.moneygate.newsfeed.domain.repository.NewsFeedRepository;
 
@@ -35,7 +37,7 @@ public class MemoryNewsFeedRepository implements NewsFeedRepository {
     public NewsFeed findByKey(String newsFeedKey) {
         NewsFeed newsFeed = newsFeeds.get(newsFeedKey);
         if (newsFeed == null) {
-            throw new NoSuchElementException("newsFeedKey" + newsFeedKey.toString());
+            throw new ApplicationException(CodeEnum.FRS_003,"newsFeedKey" + newsFeedKey.toString());
         }
         return newsFeed;
     }

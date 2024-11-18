@@ -21,7 +21,7 @@ public class MentorValidator {
         User user = userRepository.findById(mentorId);
         if (!user.isMentor()) {
             throw new ApplicationException(
-                CodeEnum.UNAUTHORIZED_USER,
+                CodeEnum.FRS_002,
                 "사용자 권한이 유효하지 않습니다.",
                 Map.of(
                     "hasRole", user.getRoles().toString(),

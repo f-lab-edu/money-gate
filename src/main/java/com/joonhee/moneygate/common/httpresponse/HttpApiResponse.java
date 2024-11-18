@@ -16,7 +16,7 @@ public class HttpApiResponse<T>{
 
     public static <T> HttpApiResponse of(T data) {
         return HttpApiResponse.builder()
-            .code(CodeEnum.SUCCESS)
+            .code(CodeEnum.RS_001)
             .data(data)
             .message("")
             .build();
@@ -24,7 +24,7 @@ public class HttpApiResponse<T>{
 
     public static HttpApiResponse fromExceptionMessage(String message) {
         return HttpApiResponse.builder()
-            .code(CodeEnum.FAIL)
+            .code(CodeEnum.FRS_001)
             .data(null)
             .message(message)
             .build();
@@ -32,7 +32,7 @@ public class HttpApiResponse<T>{
 
     public static HttpApiResponse fromExceptionMessage(String message, Map<String, Object> data) {
         return HttpApiResponse.builder()
-            .code(CodeEnum.FAIL)
+            .code(CodeEnum.FRS_001)
             .data(data)
             .message(message)
             .build();
