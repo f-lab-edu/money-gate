@@ -25,7 +25,7 @@ spring:
       idle-timeout: 60000
       max-lifetime: 58000
       data-source-properties:
-        socketTimeout: 60
+        socketTimeout: 15000
 
   sql:
     init:
