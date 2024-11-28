@@ -2,7 +2,7 @@ server:
   port: 8080
   tomcat:
     threads:
-      max: 150
+      max: 250
     accept-count: 50
 
 investing:
