@@ -2,7 +2,7 @@ server:
   port: 8080
   tomcat:
     threads:
-      max: 300
+      max: 200
     accept-count: 50
 
 investing:
@@ -26,6 +26,7 @@ spring:
       max-lifetime: 58000
       data-source-properties:
         socketTimeout: 15000
+      maximum-pool-size: 150
 
 management:
   endpoints:
