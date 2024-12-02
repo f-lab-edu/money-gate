@@ -12,7 +12,7 @@ investing:
 
 springdoc:
   swagger-ui:
-    path:"/swagger"
+    path: /swagger
 
 spring:
   datasource:
@@ -59,6 +59,11 @@ spring:
       max-lifetime: 58000
       data-source-properties:
         socketTimeout: 120
+      maximum-pool-size: 10
+
+logging:
+  level:
+    root: DEBUG
 
 ---
 spring:
