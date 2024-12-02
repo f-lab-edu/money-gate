@@ -43,21 +43,6 @@ logging:
     root: DEBUG
 
 ---
-
-logging:
-  level:
-    root: DEBUG
-
-springdoc:
-  swagger-ui:
-    path: /swagger
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info, metrics, prometheus
-
 spring:
   config:
     activate:
