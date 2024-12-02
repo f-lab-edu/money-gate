@@ -33,6 +33,7 @@ management:
     web:
       exposure:
         include: health, info, metrics, prometheus
+
 ---
 spring:
   config:
@@ -44,6 +45,7 @@ logging:
     root: DEBUG
 
 ---
+
 spring:
   config:
     activate:
