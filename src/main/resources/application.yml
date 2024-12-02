@@ -21,21 +21,6 @@ management:
         include: health, info, metrics, prometheus
 
 ---
-
-springdoc:
-  swagger-ui:
-    path: /swagger
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info, metrics, prometheus
-
-logging:
-  level:
-    root: DEBUG
-
 spring:
   config:
     activate:
@@ -53,7 +38,26 @@ spring:
         socketTimeout: 15000
       maximum-pool-size: 10
 
+logging:
+  level:
+    root: DEBUG
+
 ---
+
+logging:
+  level:
+    root: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+
 spring:
   config:
     activate:
@@ -70,10 +74,6 @@ spring:
       data-source-properties:
         socketTimeout: 120
       maximum-pool-size: 10
-
-logging:
-  level:
-    root: DEBUG
 
 ---
 spring:
