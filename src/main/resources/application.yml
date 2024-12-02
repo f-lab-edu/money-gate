@@ -13,6 +13,7 @@ investing:
 springdoc:
   swagger-ui:
     path: /swagger
+    enabled: true
 
 spring:
   datasource:
@@ -45,7 +46,6 @@ logging:
     root: DEBUG
 
 ---
-
 spring:
   config:
     activate:
