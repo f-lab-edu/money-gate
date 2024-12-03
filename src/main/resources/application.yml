@@ -58,7 +58,7 @@ spring:
       max-lifetime: 58000
       data-source-properties:
         socketTimeout: 120
-      maximum-pool-size: 150
+      maximum-pool-size: 200
 
 ---
 spring:
