@@ -12,9 +12,19 @@ investing:
 
 springdoc:
   swagger-ui:
-    path:"/swagger"
+    path: /swagger
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+
+---
 spring:
+  config:
+    activate:
+      on-profile: local
   datasource:
     url: jdbc:mysql://localhost:13306/dev
     username: joonhee
@@ -25,13 +35,8 @@ spring:
       idle-timeout: 60000
       max-lifetime: 58000
       data-source-properties:
-        socketTimeout: 15
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
+        socketTimeout: 15000
+      maximum-pool-size: 10
 
 logging:
   level:
@@ -53,6 +58,7 @@ spring:
       max-lifetime: 58000
       data-source-properties:
         socketTimeout: 120
+      maximum-pool-size: 201
 
 ---
 spring:
